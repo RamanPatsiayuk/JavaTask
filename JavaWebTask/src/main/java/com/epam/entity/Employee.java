@@ -1,5 +1,8 @@
 package com.epam.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * Created by Roman
  */

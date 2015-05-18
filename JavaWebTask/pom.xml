@@ -13,6 +13,7 @@
         <junit-version>4.12</junit-version>
         <spring-version>4.1.6.RELEASE</spring-version>
         <h2-version>1.4.187</h2-version>
+        <log4j-version>1.2.17</log4j-version>
     </properties>
 
 <dependencies>
@@ -46,6 +47,16 @@
         <groupId>org.springframework</groupId>
         <artifactId>spring-context</artifactId>
         <version>${spring-version}</version>
+    </dependency>
+    <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>${log4j-version}</version>
+    </dependency>
+    <dependency>
+        <groupId>org.hibernate.javax.persistence</groupId>
+        <artifactId>hibernate-jpa-2.0-api</artifactId>
+        <version>1.0.0.Final</version>
     </dependency>
 </dependencies>
 
