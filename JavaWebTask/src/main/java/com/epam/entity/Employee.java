@@ -18,6 +18,18 @@ public class Employee {
     private String title;
     private String department;
 
+    public Employee() {
+    }
+
+    public Employee(Integer id, String firstName, String lastName, Integer age, String title, String department) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.title = title;
+        this.department = department;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -65,6 +77,5 @@ public class Employee {
     public void setDepartment(String department) {
         this.department = department;
     }
-
 
 }

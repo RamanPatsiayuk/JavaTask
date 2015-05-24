@@ -1,6 +1,7 @@
 package com.epam.dao;
 
 import com.epam.entity.Employee;
+import org.apache.log4j.Logger;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * Created by Roman
  */
 public class EmployeeDaoImpl implements EmployeeDao {
+    static final Logger log = Logger.getLogger(EmployeeDaoImpl.class);
 
     @Override
     public void addEmployee(Employee employee) {
