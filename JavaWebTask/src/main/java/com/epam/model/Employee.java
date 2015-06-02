@@ -1,4 +1,4 @@
-package com.epam.entity;
+package com.epam.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
