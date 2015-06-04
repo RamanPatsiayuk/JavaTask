@@ -30,21 +30,21 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public void updateEmployee(Employee employee) {
         if (employee.getId() > 0) {
             // update
-            String sql = "UPDATE employee SET firstName=?, lastName=?, age=?,title=?,department=? WHERE id=?";
+            String sql = "UPDATE employee SET firstName=?, lastName=?, address=?,title=?,department=? WHERE id=?";
             jdbcTemplate.update(sql, employee.getFirstName(), employee.getLastName(),
-                    employee.getAge(),employee.getTitle(),employee.getDepartment());
+                    employee.getAddress(),employee.getTitle(),employee.getDepartment());
         } else {
             // insert
             String sql = "INSERT INTO employee (firstName, lastName, age,title,department)"
                     + " VALUES (?, ?, ?, ?)";
             jdbcTemplate.update(sql, employee.getFirstName(), employee.getLastName(),
-                    employee.getAge(),employee.getTitle(),employee.getDepartment());
+                    employee.getAddress(),employee.getTitle(),employee.getDepartment());
         }
     }
 
     @Override
-    public Employee getEmployee(int id) {
-        String sql = "SELECT * FROM employee WHERE id=?";
+    public Employee getEmployee(String name) {
+        String sql = "SELECT * FROM employee WHERE name=?";
         return null;
     }
 

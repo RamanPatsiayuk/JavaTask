@@ -14,18 +14,18 @@ public class Employee {
     private Integer id;
     private String firstName;
     private String lastName;
-    private Integer age;
+    private String address;
     private String title;
     private String department;
 
     public Employee() {
     }
 
-    public Employee(Integer id, String firstName, String lastName, Integer age, String title, String department) {
+    public Employee(Integer id, String firstName, String lastName, String address, String title, String department) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
+        this.address = address;
         this.title = title;
         this.department = department;
     }
@@ -54,12 +54,12 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    public Integer getAge() {
-        return age;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getTitle() {
