@@ -1,4 +1,4 @@
-package com.epam.com.epam.services;
+package com.epam.service;
 
 import com.epam.dao.EmployeeDao;
 import com.epam.model.Employee;
