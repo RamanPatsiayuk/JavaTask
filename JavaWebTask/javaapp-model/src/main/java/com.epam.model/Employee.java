@@ -1,14 +1,9 @@
 package com.epam.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 /**
  * Created by Roman
  */
 
-@Entity
-@Table(name = "employees")
 public class Employee {
 
     private Integer id;

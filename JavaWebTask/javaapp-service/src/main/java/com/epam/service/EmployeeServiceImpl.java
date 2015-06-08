@@ -1,4 +1,4 @@
-package com.epam.com.epam.services;
+package com.epam.service;
 
 import com.epam.dao.EmployeeDao;
 import com.epam.model.Employee;
@@ -25,8 +25,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee getEmployee(int id) {
-        return employeeDao.getEmployee(id);
+    public Employee getEmployee(String name) {
+        return employeeDao.getEmployee(name);
     }
 
     @Override

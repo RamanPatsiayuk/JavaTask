@@ -1,4 +1,4 @@
-package com.epam.com.epam.services;
+package com.epam.service;
 
 import com.epam.model.Employee;
 
@@ -10,7 +10,7 @@ import java.util.List;
 public interface EmployeeService {
     public void addEmployee(Employee employee);
     public void updateEmployee(Employee employee);
-    public Employee getEmployee(int id);
+    public Employee getEmployee(String name);
     public void deleteEmployee(int id);
     public List<Employee> getEmployees();
 }
