@@ -16,9 +16,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
     static final Logger log = Logger.getLogger(EmployeeDaoImpl.class);
     private JdbcTemplate jdbcTemplate;
 
-    public void setDataSource(DataSource dataSource) {
+    /*public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
-    }
+    }*/
 
     @Override
     public void addEmployee(Employee employee) {
@@ -31,8 +31,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         if (employee.getId() > 0) {
             // update
             String sql = "UPDATE employee SET firstName=?, lastName=?, address=?,title=?,department=? WHERE id=?";
-            jdbcTemplate.update(sql, employee.getFirstName(), employee.getLastName(),
-                    employee.getAddress(),employee.getTitle(),employee.getDepartment());
+            jdbcTemplate.update(sql, employee.getFirstName(), employee.getLastName(),employee.getAddress(),employee.getTitle(),employee.getDepartment());
         } else {
             // insert
             String sql = "INSERT INTO employee (firstName, lastName, age,title,department)"
@@ -51,12 +50,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public void deleteEmployee(int id) {
         String sql = "DELETE FROM employee WHERE id=?";
-        jdbcTemplate.update(sql, id);
+        int update = jdbcTemplate.update(sql, id);
     }
 
     @Override
     public List<Employee> getEmployees() {
-
+        String sql = "SELECT * FROM employee";
         return null;
     }
 }
