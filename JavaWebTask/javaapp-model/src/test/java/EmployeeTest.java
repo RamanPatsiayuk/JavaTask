@@ -12,13 +12,12 @@ import java.util.List;
  */
 
 public class EmployeeTest extends Assert {
-    private final List<Integer> TEST_DATA = new ArrayList<Integer>();
-
+    private final List<Employee> listEmployee= new ArrayList<Employee>();
     private Employee employee;
 
+
     @Before
-    public void setUpTestData() {
-        TEST_DATA.add(42);
+    public void setUp() {
         employee = new Employee();
     }
 
@@ -28,7 +27,7 @@ public class EmployeeTest extends Assert {
     }
 
     @After
-    public void cleanUpTestData() {
-        TEST_DATA.clear();
+    public void tearDown() {
+        listEmployee.clear();
     }
 }
