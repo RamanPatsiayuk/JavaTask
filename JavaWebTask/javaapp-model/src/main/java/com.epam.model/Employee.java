@@ -6,7 +6,7 @@ package com.epam.model;
 
 public class Employee {
 
-    private Integer id;
+    private int id;
     private String firstName;
     private String lastName;
     private String address;
@@ -16,7 +16,7 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(Integer id, String firstName, String lastName, String address, String title, String department) {
+    public Employee(int id, String firstName, String lastName, String address, String title, String department) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -29,7 +29,7 @@ public class Employee {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -73,4 +73,35 @@ public class Employee {
         this.department = department;
     }
 
+    @Override
+    public boolean equals(Object other){
+        if(this == other) return true;
+
+        if(other == null || (this.getClass() != other.getClass())){
+            return false;
+        }
+
+        Employee empl = (Employee) other;
+        return (this.id == empl.id) &&(this.firstName != null && firstName.equals(empl.firstName)) &&
+                (this.lastName != null && lastName.equals(empl.lastName))&&(this.address != null && address.equals(empl.address))
+                &&(this.title != null && title.equals(empl.title))&&(this.department != null && department.equals(empl.department));
+    }
+
+    @Override
+    public int hashCode(){
+        final int prime = 31;
+        int result = 1;
+        result = prime*result + id;
+        result = prime*result + (firstName !=null ? firstName.hashCode() : 0);
+        result = prime*result + (lastName  !=null ? lastName.hashCode() : 0);
+        result = prime*result + (address !=null ? address.hashCode() : 0);
+        result = prime*result + (title  !=null ? title.hashCode() : 0);
+        result = prime*result + (department  !=null ? department.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public String toString(){
+        return "Employee firstName=" + this.firstName + ", lastName=" + this.lastName + ", address=" + this.address + ", title=" + this.title + ", department=" + this.department +'}';
+    }
 }
