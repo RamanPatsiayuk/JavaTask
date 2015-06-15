@@ -34,7 +34,11 @@ public class EmployeeDaoTest {
 
     @Test
     public void updateEmployee(){
-
+        List<Employee> employees = employeeDao.getEmployees();
+        Employee testEmployee = new Employee(4,"Vasia","Pupkin","Brest, Green Street","SE","Java");
+        employeeDao.updateEmployee(testEmployee);
+        List<Employee> newEmployees = employeeDao.getEmployees();
+        assertThat(employees.size(),IsEqual.equalTo(newEmployees.size()));
     }
 
     @Test
