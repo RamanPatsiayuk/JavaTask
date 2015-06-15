@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,47 +20,50 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     static final Logger log = Logger.getLogger(EmployeeDaoImpl.class);
     private JdbcTemplate jdbcTemplate;
-
-
-
+    public EmployeeDaoImpl(){
+        jdbcTemplate = new JdbcTemplate(dataSource);
+    }
 
     @Override
     public void addEmployee(Employee employee) {
-        log.debug("Add employee in employee");
-
+        log.debug("Add employee in employee table");
+        String sql = "insert into employee (firstName,lastName,address,title, department) values (?,?,?,?,?)";
+        jdbcTemplate.update(sql,new Object[] {employee.getFirstName(), employee.getLastName(),employee.getAddress(),employee.getTitle(), employee.getDepartment() });
     }
 
     @Override
     public void updateEmployee(Employee employee) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
+        log.debug("Update employee in employee table");
         if (employee.getId() > 0) {
             // update
-            String sql = "UPDATE employee SET firstName=?, lastName=?, address=?,title=?,department=? WHERE id=?";
+            String sql = "update employee set firstName=?, lastName=?, address=?,title=?,department=? where id=?";
             jdbcTemplate.update(sql, employee.getFirstName(), employee.getLastName(),employee.getAddress(),employee.getTitle(),employee.getDepartment());
         } else {
-            // insert
-            String sql = "INSERT INTO employee (firstName, lastName, age,title,department)"
-                    + " VALUES (?, ?, ?, ?)";
-            jdbcTemplate.update(sql, employee.getFirstName(), employee.getLastName(),
-                    employee.getAddress(),employee.getTitle(),employee.getDepartment());
+            addEmployee(employee);
         }
     }
 
     @Override
     public Employee getEmployee(String name) {
-        String sql = "SELECT * FROM employee WHERE name=?";
-        return null;
+        log.debug("Get employee by name");
+        List<Employee> empolyeeList;
+        String sql = "select * from employee where name=?" + name;
+        empolyeeList = jdbcTemplate.query(sql, new EmployeeRowMapper());
+        return empolyeeList.get(0);
     }
 
     @Override
     public void deleteEmployee(int id) {
-        String sql = "DELETE FROM employee WHERE id=?";
-        int update = jdbcTemplate.update(sql, id);
+        log.debug("Delete employee in employee table");
+        String sql = "delete from employee where id=?";
+        jdbcTemplate.update(sql,id);
     }
 
     @Override
     public List<Employee> getEmployees() {
-        String sql = "SELECT * FROM employee";
-        return null;
+        List employeeList;
+        String sql = "select * from user";
+        employeeList = jdbcTemplate.query(sql, new EmployeeRowMapper());
+        return employeeList;
     }
 }

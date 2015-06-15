@@ -1,5 +1,6 @@
 import com.epam.dao.EmployeeDaoImpl;
 import com.epam.model.Employee;
+import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,9 +23,9 @@ public class EmployeeDaoTest {
     private EmployeeDaoImpl employeeDao;
 
     @Test
-    public void addEmployee(Employee employee){
+    public void addEmployee(){
         List<Employee> employees = employeeDao.getEmployees();
-        Employee newEmployee = new Employee();
+        Employee newEmployee = new Employee(4,"Vasia","Pupkin","Brest, Green Street","SE","Java");
         int sizeBefore = employees.size();
         employeeDao.addEmployee(newEmployee);
         employees = employeeDao.getEmployees();
@@ -32,30 +33,29 @@ public class EmployeeDaoTest {
     }
 
     @Test
-    public void updateEmployee(Employee employee){
+    public void updateEmployee(){
 
     }
 
     @Test
-    public Employee getEmployee(){
+    public void getEmployee(){
         Employee testEmployee = new Employee(4,"Vasia","Pupkin","Brest, Green Street","SE","Java");
         List<Employee> employees = employeeDao.getEmployees();
         employees.add(testEmployee);
-        String firstName = "Ulad";
+        String firstName = "Vasia";
         for(Employee employee : employees) {
             if(employee.getFirstName() == firstName)
-            return employee;
+            assertThat(employee.getFirstName()+" "+ employee.getLastName(),IsEqual.equalTo("Vasia Pupkin"));
         } throw new IllegalStateException("Employee: " + firstName + " is not in the list");
     }
 
     @Test
-    public void deleteEmployee(int id){
+    public void deleteEmployee(){
         List<Employee> employees = employeeDao.getEmployees();
         int sizeBefore = employees.size();
         employeeDao.deleteEmployee(2);
         employees = employeeDao.getEmployees();
-        assertEquals(sizeBefore-1, employees.size());
-        //assertThat("Delete employee",sizeBefore-1,equals(employees.size()));
+        assertThat("Delete employee",sizeBefore-1, IsEqual.equalTo(employees.size()));
     }
 
     @Test

@@ -8,8 +8,6 @@
 	                      http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
 
-    <import resource="classpath:daoApplicationContextSpring.xml"/>
-
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.h2.Driver" />
         <property name="url" value="jdbc:h2:mem:employee" />
