@@ -2,33 +2,33 @@ package com.epam.dao;
 
 import com.epam.model.Employee;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * Created by Roman
  */
+
+@Repository
 public class EmployeeDaoImpl implements EmployeeDao {
 
-    @Autowired
-    DataSource dataSource;
+    public DataSource dataSource;
 
     static final Logger log = Logger.getLogger(EmployeeDaoImpl.class);
     private JdbcTemplate jdbcTemplate;
-    public EmployeeDaoImpl(){
-        jdbcTemplate = new JdbcTemplate(dataSource);
+
+    public void setDataSource(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override
     public void addEmployee(Employee employee) {
         log.debug("Add employee in employee table");
         String sql = "insert into employee (firstName,lastName,address,title, department) values (?,?,?,?,?)";
-        jdbcTemplate.update(sql,new Object[] {employee.getFirstName(), employee.getLastName(),employee.getAddress(),employee.getTitle(), employee.getDepartment() });
+        jdbcTemplate.update(sql, new Object[]{employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getTitle(), employee.getDepartment()});
     }
 
     @Override
@@ -37,7 +37,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         if (employee.getId() > 0) {
             // update
             String sql = "update employee set firstName=?, lastName=?, address=?,title=?,department=? where id=?";
-            jdbcTemplate.update(sql, employee.getFirstName(), employee.getLastName(),employee.getAddress(),employee.getTitle(),employee.getDepartment());
+            jdbcTemplate.update(sql, employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getTitle(), employee.getDepartment());
         } else {
             addEmployee(employee);
         }
@@ -56,7 +56,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public void deleteEmployee(int id) {
         log.debug("Delete employee in employee table");
         String sql = "delete from employee where id=?";
-        jdbcTemplate.update(sql,id);
+        jdbcTemplate.update(sql, id);
     }
 
     @Override

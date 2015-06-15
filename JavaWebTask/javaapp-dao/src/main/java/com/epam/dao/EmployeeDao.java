@@ -9,8 +9,12 @@ import java.util.List;
  */
 public interface EmployeeDao {
     public void addEmployee(Employee employee);
+
     public void updateEmployee(Employee employee);
+
     public Employee getEmployee(String name);
+
     public void deleteEmployee(int id);
+
     public List<Employee> getEmployees();
 }
