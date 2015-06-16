@@ -15,7 +15,9 @@
         <property name="password" value="" />
     </bean>
 
-    <bean id="dataSource" class"">
+    <bean id="EmployeeDao" class"com.epam.dao.EmployeeDaoImpl">
+    <property name="dataSource" ref="dataSource" />
+    </bean>
 
     <jdbc:initialize-database data-source="dataSource">
         <jdbc:script location="create-table.sql"/>
