@@ -62,7 +62,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public List<Employee> getEmployees() {
         List employeeList;
-        String sql = "select * from user";
+        String sql = "select * from employee";
         employeeList = jdbcTemplate.query(sql, new EmployeeRowMapper());
         return employeeList;
     }
