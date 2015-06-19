@@ -2,10 +2,12 @@ package com.epam.dao;
 
 import com.epam.model.Employee;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,6 +17,7 @@ import java.util.List;
 @Repository
 public class EmployeeDaoImpl implements EmployeeDao {
 
+    @Autowired
     public DataSource dataSource;
 
     static final Logger log = Logger.getLogger(EmployeeDaoImpl.class);
@@ -27,8 +30,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public void addEmployee(Employee employee) {
         log.debug("Add employee in employee table");
-        String sql = "insert into employee (firstName,lastName,address,title, department) values (?,?,?,?,?)";
-        jdbcTemplate.update(sql, new Object[]{employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getTitle(), employee.getDepartment()});
+        String sql = "insert into employee (id,firstName,lastName,address,title, department) values (?,?,?,?,?,?)";
+        jdbcTemplate.update(sql, new Object[]{employee.getId(),employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getTitle(), employee.getDepartment()});
     }
 
     @Override
@@ -37,7 +40,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         if (employee.getId() > 0) {
             // update
             String sql = "update employee set firstName=?, lastName=?, address=?,title=?,department=? where id=?";
-            jdbcTemplate.update(sql, employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getTitle(), employee.getDepartment());
+            jdbcTemplate.update(sql,employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getTitle(), employee.getDepartment(), employee.getId());
         } else {
             addEmployee(employee);
         }
@@ -46,10 +49,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public Employee getEmployee(String name) {
         log.debug("Get employee by name");
-        List<Employee> empolyeeList;
-        String sql = "select * from employee where name=?" + name;
-        empolyeeList = jdbcTemplate.query(sql, new EmployeeRowMapper());
-        return empolyeeList.get(0);
+        List<Employee> empoloyeeList;
+        String sql = "select * from employee where firstName=" + name;
+        empoloyeeList = jdbcTemplate.query(sql,new EmployeeRowMapper());
+        return empoloyeeList.get(0);
+        /*Employee empoloyee = jdbcTemplate.queryForObject(sql, new Object[]{name}, new EmployeeRowMapper());
+        return empoloyee;*/
     }
 
     @Override
@@ -61,7 +66,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public List<Employee> getEmployees() {
-        List employeeList;
+        List<Employee> employeeList;
         String sql = "select * from employee";
         employeeList = jdbcTemplate.query(sql, new EmployeeRowMapper());
         return employeeList;
