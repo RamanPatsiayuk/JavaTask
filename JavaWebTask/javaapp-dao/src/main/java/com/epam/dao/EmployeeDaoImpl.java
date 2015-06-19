@@ -7,7 +7,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -17,11 +16,18 @@ import java.util.List;
 @Repository
 public class EmployeeDaoImpl implements EmployeeDao {
 
+    List<Employee> employeeList;
+    static final Logger log = Logger.getLogger(EmployeeDaoImpl.class);
+    private static final String addEmployeeSql = "insert into employee (id,firstName,lastName,address,title, department) values (?,?,?,?,?,?)";
+    private static final String updateEmployeeSql = "update employee set firstName=?, lastName=?, address=?,title=?,department=? where id=?";
+    private static final String deleteEmployeeSql = "delete from employee where id=?";
+    private static final String getEmployeeSql = "select * from employee";
+    private static final String getEmployeeByFirstNameSql = "select * from employee where firstName=?";
+
+    private JdbcTemplate jdbcTemplate;
+
     @Autowired
     public DataSource dataSource;
-
-    static final Logger log = Logger.getLogger(EmployeeDaoImpl.class);
-    private JdbcTemplate jdbcTemplate;
 
     public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -30,8 +36,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public void addEmployee(Employee employee) {
         log.debug("Add employee in employee table");
-        String sql = "insert into employee (id,firstName,lastName,address,title, department) values (?,?,?,?,?,?)";
-        jdbcTemplate.update(sql, new Object[]{employee.getId(),employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getTitle(), employee.getDepartment()});
+        jdbcTemplate.update(addEmployeeSql, new Object[]{employee.getId(), employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getTitle(), employee.getDepartment()});
     }
 
     @Override
@@ -39,8 +44,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         log.debug("Update employee in employee table");
         if (employee.getId() > 0) {
             // update
-            String sql = "update employee set firstName=?, lastName=?, address=?,title=?,department=? where id=?";
-            jdbcTemplate.update(sql,employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getTitle(), employee.getDepartment(), employee.getId());
+            jdbcTemplate.update(updateEmployeeSql, employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getTitle(), employee.getDepartment(), employee.getId());
         } else {
             addEmployee(employee);
         }
@@ -50,25 +54,21 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public Employee getEmployee(String name) {
         log.debug("Get employee by name");
         List<Employee> empoloyeeList;
-        String sql = "select * from employee where firstName=" + name;
-        empoloyeeList = jdbcTemplate.query(sql,new EmployeeRowMapper());
+        empoloyeeList = jdbcTemplate.query(getEmployeeByFirstNameSql, new EmployeeRowMapper(), name);
         return empoloyeeList.get(0);
-        /*Employee empoloyee = jdbcTemplate.queryForObject(sql, new Object[]{name}, new EmployeeRowMapper());
+       /* Employee empoloyee = jdbcTemplate.queryForObject(sql, new Object[]{name}, new EmployeeRowMapper());
         return empoloyee;*/
     }
 
     @Override
     public void deleteEmployee(int id) {
         log.debug("Delete employee in employee table");
-        String sql = "delete from employee where id=?";
-        jdbcTemplate.update(sql, id);
+        jdbcTemplate.update(deleteEmployeeSql, id);
     }
 
     @Override
     public List<Employee> getEmployees() {
-        List<Employee> employeeList;
-        String sql = "select * from employee";
-        employeeList = jdbcTemplate.query(sql, new EmployeeRowMapper());
+        employeeList = jdbcTemplate.query(getEmployeeSql, new EmployeeRowMapper());
         return employeeList;
     }
 }

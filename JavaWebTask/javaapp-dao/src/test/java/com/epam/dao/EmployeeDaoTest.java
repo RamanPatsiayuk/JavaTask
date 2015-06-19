@@ -46,7 +46,7 @@ public class EmployeeDaoTest {
 
     @Test
     public void getEmployee() {
-        String firstName = "Ivan";
+        String firstName = "Vasia";
         List<Employee> employees = employeeDao.getEmployees();
         employees.add(testEmployee);
         Employee newEmpl = employeeDao.getEmployee(firstName);
