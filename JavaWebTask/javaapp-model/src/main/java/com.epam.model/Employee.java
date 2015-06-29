@@ -11,18 +11,20 @@ public class Employee {
     private String lastName;
     private String address;
     private String title;
-    private String department;
+    private Department department;
+    private int salary;
 
     public Employee() {
     }
 
-    public Employee(int id, String firstName, String lastName, String address, String title, String department) {
+    public Employee(int id, String firstName, String lastName, String address, String title, Department department,int salary) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
         this.title = title;
         this.department = department;
+        this.salary = salary;
     }
 
     public Integer getId() {
@@ -65,12 +67,20 @@ public class Employee {
         this.title = title;
     }
 
-    public String getDepartment() {
+    public Department getDepartment() {
         return department;
     }
 
-    public void setDepartment(String department) {
+    public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
     }
 
     @Override
@@ -84,7 +94,7 @@ public class Employee {
         Employee empl = (Employee) other;
         return (this.id == empl.id) && (this.firstName != null && firstName.equals(empl.firstName)) &&
                 (this.lastName != null && lastName.equals(empl.lastName)) && (this.address != null && address.equals(empl.address))
-                && (this.title != null && title.equals(empl.title)) && (this.department != null && department.equals(empl.department));
+                && (this.title != null && title.equals(empl.title)) && (this.department != null && department.equals(empl.department))&&(this.salary == empl.salary);
     }
 
     @Override
@@ -97,11 +107,12 @@ public class Employee {
         result = prime * result + (address != null ? address.hashCode() : 0);
         result = prime * result + (title != null ? title.hashCode() : 0);
         result = prime * result + (department != null ? department.hashCode() : 0);
+        result = prime * result + salary;
         return result;
     }
 
     @Override
     public String toString() {
-        return "Employee firstName=" + this.firstName + ", lastName=" + this.lastName + ", address=" + this.address + ", title=" + this.title + ", department=" + this.department + '}';
+        return "Employee firstName=" + this.firstName + ", lastName=" + this.lastName + ", address=" + this.address + ", title=" + this.title + ", department=" + this.department + ", salary=" + this.salary + '}';
     }
 }

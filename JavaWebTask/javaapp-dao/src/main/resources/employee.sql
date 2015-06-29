@@ -5,4 +5,6 @@ firstName varchar(255) NOT NULL,
 lastName varchar(255) NOT NULL,
 address varchar(255) NOT NULL,
 title varchar(255) NOT NULL,
-department varchar(255) NOT NULL);
+department varchar(255) NOT NULL,
+salary int NOT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

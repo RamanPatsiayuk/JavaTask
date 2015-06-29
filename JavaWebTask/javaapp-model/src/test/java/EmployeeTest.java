@@ -21,9 +21,9 @@ public class EmployeeTest extends Assert {
     @Before
     public void setUp() {
         employee = new Employee();
-        listEmployee.add(new Employee(1,"Vasiya","Petrov","Minsk","SE","Java"));
-        listEmployee.add(new Employee(2,"Petia","Orlov","Gomel","JSE","PHP"));
-        listEmployee.add(new Employee(3,"Kolia","Drozdov","Vitebsk","SSE",".Net"));
+        listEmployee.add(new Employee(1,"Vasiya","Petrov","Minsk","SE","Java",600));
+        listEmployee.add(new Employee(2,"Petia","Orlov","Gomel","JSE","PHP",400));
+        listEmployee.add(new Employee(3,"Kolia","Drozdov","Vitebsk","SSE",".Net",1100));
         listEmployee.add(new Employee(4,"Misha","Tyrkov","Minsk","LSE","Java"));
     }
 
@@ -52,15 +52,15 @@ public class EmployeeTest extends Assert {
 
     @Test
     public void testEqualsEmployeesOperation(){
-        Employee employee1 = new Employee(1,"Vasiya","Petrov","Minsk","SE","Java");
-        Employee employee2 = new Employee(1,"Vasiya","Petrov","Minsk","SE","Java");
+        Employee employee1 = new Employee(1,"Vasiya","Petrov","Minsk","SE","Java",500);
+        Employee employee2 = new Employee(1,"Vasiya","Petrov","Minsk","SE","Java",500);
         assertTrue(employee1.equals(employee2));
     }
 
     @Test(expected = AssertionError.class)
     public void testAssertionErrorException(){
-        Employee employee1 = new Employee(1,"Kolya","Petrov","Minsk","SE","Java");
-        Employee employee2 = new Employee(1,"Vasiya","Petrov","Minsk","SE","Java");
+        Employee employee1 = new Employee(1,"Kolya","Petrov","Minsk","SE","Java",500);
+        Employee employee2 = new Employee(1,"Vasiya","Petrov","Minsk","SE","Java",600);
         assertTrue(employee1.equals(employee2));
     }
 
