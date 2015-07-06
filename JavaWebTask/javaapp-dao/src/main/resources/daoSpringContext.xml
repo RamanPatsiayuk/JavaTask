@@ -20,8 +20,8 @@
     </bean>
 
     <jdbc:initialize-database data-source="dataSource">
-        <jdbc:script location="create-table.sql"/>
-        <jdbc:script location="data-script.sql"/>
+        <jdbc:script location="employee.sql"/>
+        <jdbc:script location="employeedata-script.sql"/>
     </jdbc:initialize-database>
 
 </beans>
