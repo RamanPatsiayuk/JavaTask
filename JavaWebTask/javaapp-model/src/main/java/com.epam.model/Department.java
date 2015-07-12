@@ -5,7 +5,7 @@ package com.epam.model;
  */
 public class Department {
 
-    private int id;
+    private int departmentId;
     private String department;
     private String location;
 
@@ -14,17 +14,17 @@ public class Department {
     }
 
     public Department(int id, String department, String location) {
-        this.id = id;
+        this.departmentId = id;
         this.department = department;
         this.location = location;
     }
 
-    public int getId() {
-        return id;
+    public int getDepartmentId() {
+        return departmentId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
     }
 
     public String getDepartment() {

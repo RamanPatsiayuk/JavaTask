@@ -25,7 +25,7 @@ public class EmployeeDaoTest {
     @Autowired
     public EmployeeDao employeeDao;
 
-    Employee testEmployee = new Employee(4, "Vasia", "Pupkin", "Brest, Green Street", "SE", "Java",600);
+    Employee testEmployee = new Employee(4, "Vasia", "Pupkin", "Brest, Green Street", "SE", 1,600);
 
     @Test
     public void addEmployee() {

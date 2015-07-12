@@ -18,8 +18,8 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     List<Employee> employeeList;
     static final Logger log = Logger.getLogger(EmployeeDaoImpl.class);
-    private static final String addEmployeeSql = "insert into employee (id,firstName,lastName,address,title, department,salary) values (?,?,?,?,?,?,?)";
-    private static final String updateEmployeeSql = "update employee set firstName=?, lastName=?, address=?,title=?,department=?,salary=? where id=?";
+    private static final String addEmployeeSql = "insert into employee (id,firstName,lastName,address,title, departmentId,salary) values (?,?,?,?,?,?,?)";
+    private static final String updateEmployeeSql = "update employee set firstName=?, lastName=?, address=?,title=?,departmentId=?,salary=? where id=?";
     private static final String deleteEmployeeSql = "delete from employee where id=?";
     private static final String getEmployeeSql = "select * from employee";
     private static final String getEmployeeByFirstNameSql = "select * from employee where firstName=?";
@@ -36,7 +36,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public void addEmployee(Employee employee) {
         log.debug("Add employee in employee table");
-        jdbcTemplate.update(addEmployeeSql, new Object[]{employee.getId(), employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getTitle(), employee.getDepartment(),employee.getSalary()});
+        jdbcTemplate.update(addEmployeeSql, new Object[]{employee.getId(), employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getPosition(), employee.getDepartmentId(),employee.getSalary()});
     }
 
     @Override
@@ -44,7 +44,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
         log.debug("Update employee in employee table");
         if (employee.getId() > 0) {
             // update
-            jdbcTemplate.update(updateEmployeeSql, employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getTitle(), employee.getDepartment(),employee.getSalary(), employee.getId());
+            jdbcTemplate.update(updateEmployeeSql, employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getPosition(), employee.getDepartmentId(),employee.getSalary(), employee.getId());
         } else {
             addEmployee(employee);
         }
