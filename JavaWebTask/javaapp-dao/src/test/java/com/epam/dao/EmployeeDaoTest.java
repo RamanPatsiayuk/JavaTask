@@ -1,7 +1,6 @@
 package com.epam.dao;
 
 import com.epam.model.Employee;
-import org.hamcrest.core.IsEqual;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +10,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.number.OrderingComparison.*;
+import static org.hamcrest.number.OrderingComparison.greaterThanOrEqualTo;
+import static org.hamcrest.number.OrderingComparison.lessThanOrEqualTo;
 import static org.junit.Assert.*;
 
 /**
- * Created by Raman_Patsiayuk
+ * Created by Roman
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,7 +25,7 @@ public class EmployeeDaoTest {
     @Autowired
     public EmployeeDao employeeDao;
 
-    Employee testEmployee = new Employee(4, "Vasia", "Pupkin", "Brest, Green Street", "SE", "Java");
+    Employee testEmployee = new Employee(4, "Vasia", "Pupkin", "Brest, Green Street", "SE", 1,600);
 
     @Test
     public void addEmployee() {
@@ -62,10 +62,10 @@ public class EmployeeDaoTest {
         assertThat("Delete employee", sizeBefore - 1, lessThanOrEqualTo(employees.size()));
     }
 
-    @Test
+   /* @Test
     public void getEmployees() {
         List<Employee> employees = employeeDao.getEmployees();
         assertNotNull(employees);
         assertFalse(employees.isEmpty());
-    }
+    }*/
 }

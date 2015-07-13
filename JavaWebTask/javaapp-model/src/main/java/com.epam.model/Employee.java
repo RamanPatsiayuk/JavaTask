@@ -10,19 +10,21 @@ public class Employee {
     private String firstName;
     private String lastName;
     private String address;
-    private String title;
-    private String department;
+    private String position;
+    private int departmentId;
+    private double salary;
 
     public Employee() {
     }
 
-    public Employee(int id, String firstName, String lastName, String address, String title, String department) {
+    public Employee(int id, String firstName, String lastName, String address, String title, int departmentId,double salary) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
-        this.title = title;
-        this.department = department;
+        this.position = title;
+        this.departmentId = departmentId;
+        this.salary = salary;
     }
 
     public Integer getId() {
@@ -57,20 +59,28 @@ public class Employee {
         this.address = address;
     }
 
-    public String getTitle() {
-        return title;
+    public String getPosition() {
+        return position;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setPosition(String position) {
+        this.position = position;
     }
 
-    public String getDepartment() {
-        return department;
+    public int getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
 
     @Override
@@ -84,7 +94,7 @@ public class Employee {
         Employee empl = (Employee) other;
         return (this.id == empl.id) && (this.firstName != null && firstName.equals(empl.firstName)) &&
                 (this.lastName != null && lastName.equals(empl.lastName)) && (this.address != null && address.equals(empl.address))
-                && (this.title != null && title.equals(empl.title)) && (this.department != null && department.equals(empl.department));
+                && (this.position != null && position.equals(empl.position)) && (departmentId == empl.departmentId)&&(this.salary == empl.salary);
     }
 
     @Override
@@ -95,13 +105,14 @@ public class Employee {
         result = prime * result + (firstName != null ? firstName.hashCode() : 0);
         result = prime * result + (lastName != null ? lastName.hashCode() : 0);
         result = prime * result + (address != null ? address.hashCode() : 0);
-        result = prime * result + (title != null ? title.hashCode() : 0);
-        result = prime * result + (department != null ? department.hashCode() : 0);
+        result = prime * result + (position != null ? position.hashCode() : 0);
+        result = prime * result + departmentId;
+        result = prime * result + (int)salary;
         return result;
     }
 
     @Override
     public String toString() {
-        return "Employee firstName=" + this.firstName + ", lastName=" + this.lastName + ", address=" + this.address + ", title=" + this.title + ", department=" + this.department + '}';
+        return "Employee firstName=" + this.firstName + ", lastName=" + this.lastName + ", address=" + this.address + ", position=" + this.position + ", departmentId=" + this.departmentId + ", salary=" + this.salary + '}';
     }
 }
