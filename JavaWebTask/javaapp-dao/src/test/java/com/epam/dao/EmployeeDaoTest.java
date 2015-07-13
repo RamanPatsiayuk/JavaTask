@@ -15,7 +15,7 @@ import static org.hamcrest.number.OrderingComparison.lessThanOrEqualTo;
 import static org.junit.Assert.*;
 
 /**
- * Created by Roman
+ * Created by Raman_Patsiayuk
  */
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,7 +25,7 @@ public class EmployeeDaoTest {
     @Autowired
     public EmployeeDao employeeDao;
 
-    Employee testEmployee = new Employee(4, "Vasia", "Pupkin", "Brest, Green Street", "SE", 1,600);
+    Employee testEmployee = new Employee(4, "Vasia", "Pupkin", "Brest, Green Street", "SE", 2,600);
 
     @Test
     public void addEmployee() {
@@ -62,10 +62,10 @@ public class EmployeeDaoTest {
         assertThat("Delete employee", sizeBefore - 1, lessThanOrEqualTo(employees.size()));
     }
 
-   /* @Test
+    @Test
     public void getEmployees() {
         List<Employee> employees = employeeDao.getEmployees();
         assertNotNull(employees);
         assertFalse(employees.isEmpty());
-    }*/
+    }
 }

@@ -19,7 +19,7 @@ public class EmployeeExtractor implements ResultSetExtractor<Employee> {
         employee.setLastName(resultSet.getString(3));
         employee.setAddress(resultSet.getString(4));
         employee.setDepartmentId(resultSet.getInt(5));
-        employee.setSalary(resultSet.getDouble(6));
+        employee.setSalary(resultSet.getDouble(7));
         return employee;
     }
 }

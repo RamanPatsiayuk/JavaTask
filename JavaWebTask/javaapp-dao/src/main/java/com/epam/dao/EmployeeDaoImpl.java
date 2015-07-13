@@ -18,11 +18,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     List<Employee> employeeList;
     static final Logger log = Logger.getLogger(EmployeeDaoImpl.class);
-    private static final String addEmployeeSql = "insert into employee (id,firstName,lastName,address,title, departmentId,salary) values (?,?,?,?,?,?,?)";
-    private static final String updateEmployeeSql = "update employee set firstName=?, lastName=?, address=?,title=?,departmentId=?,salary=? where id=?";
+    private static final String addEmployeeSql = "insert into employee (id,firstName,lastName,address,position, department) values (?,?,?,?,?,?)";
+    private static final String updateEmployeeSql = "update employee set firstName=?, lastName=?, address=?,position=?,department=? where id=?";
     private static final String deleteEmployeeSql = "delete from employee where id=?";
     private static final String getEmployeeSql = "select * from employee";
-    private static final String getEmployeeByFirstNameSql = "select * from employee where firstName=?";
+    private static final String getEmployeeByIdSql = "select * from employee where id=?";
 
     private JdbcTemplate jdbcTemplate;
 
@@ -54,10 +54,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public Employee getEmployee(String name) {
         log.debug("Get employee by name");
         List<Employee> empoloyeeList;
-        empoloyeeList = jdbcTemplate.query(getEmployeeByFirstNameSql, new EmployeeRowMapper(), name);
-        return empoloyeeList.get(0);
-       /* Employee empoloyee = jdbcTemplate.queryForObject(sql, new Object[]{name}, new EmployeeRowMapper());
-        return empoloyee;*/
+        //empoloyeeList = jdbcTemplate.query(getEmployeeByIdSql, new EmployeeRowMapper(), name);
+        //return empoloyeeList.get(0);
+        Employee empoloyee = jdbcTemplate.queryForObject(getEmployeeByIdSql, new Object[]{name}, new EmployeeRowMapper());
+        return empoloyee;
     }
 
     @Override
