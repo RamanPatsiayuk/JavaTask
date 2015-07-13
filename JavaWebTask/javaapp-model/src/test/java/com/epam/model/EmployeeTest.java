@@ -1,4 +1,5 @@
-import com.epam.model.Employee;
+package com.epam.model;
+
 import org.hamcrest.core.IsEqual;
 import org.junit.After;
 import org.junit.Assert;
