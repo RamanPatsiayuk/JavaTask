@@ -10,12 +10,12 @@
 
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.h2.Driver" />
-        <property name="url" value="jdbc:h2:mem:employee" />
+        <property name="url" value="jdbc:h2:mem:employee,department;DB_CLOSE_DELAY=-1" />
         <property name="username" value="sa" />
         <property name="password" value="" />
     </bean>
 
-    <bean id="employeeDao" class="com.epam.dao.EmployeeDaoImpl">
+    <bean id="employeeDao" class="com.epam.dao.employee.EmployeeDaoImpl">
         <property name="dataSource" ref="dataSource" />
     </bean>
 

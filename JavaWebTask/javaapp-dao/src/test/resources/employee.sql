@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS Employee;
 CREATE TABLE Employee(
-employee_id int  primary key auto_increment,
+employee_id int  primary key,
 firstName varchar(255) NOT NULL,
 lastName varchar(255) NOT NULL,
 address varchar(255) NOT NULL,

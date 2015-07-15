@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS Department;
 CREATE TABLE Department (
   departmentId int primary key,
   department varchar(255) NOT NULL,

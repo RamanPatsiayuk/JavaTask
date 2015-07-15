@@ -1,5 +1,6 @@
 package com.epam.dao;
 
+import com.epam.dao.employee.EmployeeDao;
 import com.epam.model.Employee;
 import org.junit.Test;
 import org.junit.runner.RunWith;

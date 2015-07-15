@@ -15,7 +15,7 @@
         <property name="password" value="" />
     </bean>
 
-    <bean id="employeeDao" class="com.epam.dao.EmployeeDaoImpl">
+    <bean id="employeeDao" class="com.epam.dao.employee.EmployeeDaoImpl">
     <property name="dataSource" ref="dataSource" />
     </bean>
 

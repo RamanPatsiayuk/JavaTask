@@ -1,6 +1,6 @@
 package com.epam.service;
 
-import com.epam.dao.EmployeeDao;
+import com.epam.dao.employee.EmployeeDao;
 import com.epam.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 
