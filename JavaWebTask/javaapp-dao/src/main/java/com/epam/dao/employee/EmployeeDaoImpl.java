@@ -1,4 +1,4 @@
-package com.epam.dao;
+package com.epam.dao.employee;
 
 import com.epam.model.Employee;
 import org.apache.log4j.Logger;
@@ -18,11 +18,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     List<Employee> employeeList;
     static final Logger log = Logger.getLogger(EmployeeDaoImpl.class);
-    private static final String addEmployeeSql = "insert into employee (id,firstName,lastName,address,position, department) values (?,?,?,?,?,?)";
-    private static final String updateEmployeeSql = "update employee set firstName=?, lastName=?, address=?,position=?,department=? where id=?";
-    private static final String deleteEmployeeSql = "delete from employee where id=?";
+    private static final String addEmployeeSql = "insert into employee (employee_id,firstName,lastName,address,position, departmentId, salary) values (?,?,?,?,?,?,?)";
+    private static final String updateEmployeeSql = "update employee set firstName=?, lastName=?, address=?,position=?,departmentId=?, salary=? where employee_id=?";
+    private static final String deleteEmployeeSql = "delete from employee where employee_id=?";
     private static final String getEmployeeSql = "select * from employee";
-    private static final String getEmployeeByIdSql = "select * from employee where id=?";
+    private static final String getEmployeeByFirstNameSql = "select * from employee where firstName=?";
 
     private JdbcTemplate jdbcTemplate;
 
@@ -36,15 +36,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public void addEmployee(Employee employee) {
         log.debug("Add employee in employee table");
-        jdbcTemplate.update(addEmployeeSql, new Object[]{employee.getId(), employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getPosition(), employee.getDepartmentId(),employee.getSalary()});
+        jdbcTemplate.update(addEmployeeSql, new Object[]{employee.getEmployee_id(), employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getPosition(), employee.getDepartmentId(),employee.getSalary()});
     }
 
     @Override
     public void updateEmployee(Employee employee) {
         log.debug("Update employee in employee table");
-        if (employee.getId() > 0) {
+        if (employee.getEmployee_id() > 0) {
             // update
-            jdbcTemplate.update(updateEmployeeSql, employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getPosition(), employee.getDepartmentId(),employee.getSalary(), employee.getId());
+            jdbcTemplate.update(updateEmployeeSql, employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getPosition(), employee.getDepartmentId(),employee.getSalary(), employee.getEmployee_id());
         } else {
             addEmployee(employee);
         }
@@ -54,9 +54,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
     public Employee getEmployee(String name) {
         log.debug("Get employee by name");
         List<Employee> empoloyeeList;
-        //empoloyeeList = jdbcTemplate.query(getEmployeeByIdSql, new EmployeeRowMapper(), name);
+        //empoloyeeList = jdbcTemplate.query(getEmployeeByFirstNameSql, new EmployeeRowMapper(), name);
         //return empoloyeeList.get(0);
-        Employee empoloyee = jdbcTemplate.queryForObject(getEmployeeByIdSql, new Object[]{name}, new EmployeeRowMapper());
+        Employee empoloyee = jdbcTemplate.queryForObject(getEmployeeByFirstNameSql, new Object[]{name}, new EmployeeRowMapper());
         return empoloyee;
     }
 

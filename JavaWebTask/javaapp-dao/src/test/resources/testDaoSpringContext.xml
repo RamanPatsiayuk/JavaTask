@@ -15,15 +15,15 @@
         <property name="password" value="" />
     </bean>
 
-    <bean id="employeeDao" class="com.epam.dao.EmployeeDaoImpl">
+    <bean id="employeeDao" class="com.epam.dao.employee.EmployeeDaoImpl">
     <property name="dataSource" ref="dataSource" />
     </bean>
 
     <jdbc:initialize-database data-source="dataSource">
-        <jdbc:script location="employee.sql"/>
-        <jdbc:script location="employee-data-script.sql"/>
         <jdbc:script location="department.sql"/>
         <jdbc:script location="department-data-script.sql"/>
+        <jdbc:script location="employee.sql"/>
+        <jdbc:script location="employee-data-script.sql"/>
     </jdbc:initialize-database>
 
 </beans>

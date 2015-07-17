@@ -1,4 +1,4 @@
-package com.epam.dao;
+package com.epam.dao.employee;
 
 import com.epam.model.Employee;
 import org.springframework.jdbc.core.RowMapper;

@@ -6,6 +6,8 @@ package com.epam.model;
 
 public class Employee {
 
+
+
     private int employee_id;
     private String firstName;
     private String lastName;
@@ -27,14 +29,13 @@ public class Employee {
         this.salary = salary;
     }
 
-    public Integer getId() {
+    public int getEmployee_id() {
         return employee_id;
     }
 
-    public void setId(int employee_id) {
+    public void setEmployee_id(int employee_id) {
         this.employee_id = employee_id;
     }
-
     public String getFirstName() {
         return firstName;
     }
