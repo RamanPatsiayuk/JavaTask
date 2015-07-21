@@ -16,7 +16,11 @@
     </bean>
 
     <bean id="employeeDao" class="com.epam.dao.employee.EmployeeDaoImpl">
-    <property name="dataSource" ref="dataSource" />
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
+    <bean id="departmentDao" class="com.epam.dao.department.DepartmentDaoImpl">
+        <property name="dataSource" ref="dataSource" />
     </bean>
 
     <jdbc:initialize-database data-source="dataSource">

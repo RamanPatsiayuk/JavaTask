@@ -53,11 +53,14 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public Employee getEmployee(String name) {
         log.debug("Get employee by name");
-        List<Employee> empoloyeeList;
-        //empoloyeeList = jdbcTemplate.query(getEmployeeByFirstNameSql, new EmployeeRowMapper(), name);
-        //return empoloyeeList.get(0);
-        Employee empoloyee = jdbcTemplate.queryForObject(getEmployeeByFirstNameSql, new Object[]{name}, new EmployeeRowMapper());
-        return empoloyee;
+        /*List<Employee> empoloyeeList = employeeDa;
+        for (Employee p : empoloyeeList) {
+            if (oldest == null || p.getAge() > oldest.getAge()) oldest = p;
+        }*/
+        employeeList = jdbcTemplate.query(getEmployeeByFirstNameSql, new EmployeeRowMapper(), name);
+        return employeeList.get(0);
+        /*Employee empoloyee = jdbcTemplate.queryForObject(getEmployeeByFirstNameSql, new Object[]{name}, new EmployeeRowMapper());
+        return empoloyee;*/
     }
 
     @Override
