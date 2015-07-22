@@ -9,9 +9,9 @@ import java.util.List;
  */
 public interface DepartmentDao {
 
-    public void addDepartment(Department employee);
+    public void addDepartment(Department department);
 
-    public void updateDepartment(Department employee);
+    public void updateDepartment(Department department);
 
     public Department getDepartment(String name);
 
