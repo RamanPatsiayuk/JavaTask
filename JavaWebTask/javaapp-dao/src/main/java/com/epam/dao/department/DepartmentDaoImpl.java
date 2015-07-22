@@ -41,6 +41,12 @@ public class DepartmentDaoImpl implements DepartmentDao {
     @Override
     public void updateDepartment(Department department) {
         log.debug("Update department in department table");
+        if (department.getDepartmentId() > 0) {
+            // update
+            jdbcTemplate.update(updateDepartmentSql, department.getDepartment(), department.getLocation());
+        } else {
+            addDepartment(department);
+        }
     }
 
     @Override
@@ -52,7 +58,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     @Override
     public void deleteDepartment(int id) {
         log.debug("Delete department in department table");
-
+        jdbcTemplate.update(deleteDepartmentSql, id);
     }
 
     @Override
