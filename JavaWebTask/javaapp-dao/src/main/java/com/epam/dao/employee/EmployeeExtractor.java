@@ -14,7 +14,7 @@ public class EmployeeExtractor implements ResultSetExtractor<Employee> {
     @Override
     public Employee extractData(ResultSet resultSet) throws SQLException, DataAccessException {
         Employee employee = new Employee();
-        employee.setEmployee_id(resultSet.getInt(1));
+        employee.setEmployeeId(resultSet.getInt(1));
         employee.setFirstName(resultSet.getString(2));
         employee.setLastName(resultSet.getString(3));
         employee.setAddress(resultSet.getString(4));

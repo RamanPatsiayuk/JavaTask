@@ -1,7 +1,10 @@
 package com.epam.dao;
 
 import com.epam.dao.employee.EmployeeDao;
+import com.epam.model.Department;
 import com.epam.model.Employee;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +30,12 @@ public class EmployeeDaoTest {
     @Autowired
     public EmployeeDao employeeDao;
 
-    Employee testEmployee = new Employee(4, "Vasia", "Pupkin", "Brest, Green Street", "SE", 2,600);
+    Employee testEmployee;
+
+    @Before
+    public void setUp(){
+        testEmployee =  new Employee(10, "Vasia", "Pupkin", "Brest, Green Street", "SE", 2,600);
+    }
 
     @Test
     public void addEmployee() {
@@ -47,13 +55,13 @@ public class EmployeeDaoTest {
     }
 
     @Test
-    @Ignore
+    //@Ignore
     public void getEmployee() {
         String firstName = "Vasia";
         List<Employee> employees = employeeDao.getEmployees();
-        employees.add(testEmployee);
-        Employee newEmpl = employeeDao.getEmployee(firstName);
-        //assertThat(employees, (Matcher<? super List<Employee>>) contains("Ivan"));//equalTo(testEmployee));
+        employeeDao.addEmployee(testEmployee);
+        assertTrue(employeeDao.getEmployeeByFirstName(firstName).contains(testEmployee));
+        //assertThat(employees, contains(testEmployee));//equalTo(testEmployee));
     }
 
     @Test
@@ -70,5 +78,11 @@ public class EmployeeDaoTest {
         List<Employee> employees = employeeDao.getEmployees();
         assertNotNull(employees);
         assertFalse(employees.isEmpty());
+    }
+
+    @After
+    public void tearDown(){
+        employeeDao = null;
+        testEmployee = null;
     }
 }

@@ -3,6 +3,8 @@ package com.epam.dao;
 import com.epam.dao.department.DepartmentDao;
 import com.epam.model.Department;
 import com.epam.model.Employee;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,9 +16,7 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.number.OrderingComparison.greaterThanOrEqualTo;
 import static org.hamcrest.number.OrderingComparison.lessThanOrEqualTo;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 /**
  * Created by Roman
@@ -27,8 +27,15 @@ public class DepartmentDaoTest {
 
     @Autowired
     public DepartmentDao departmentDao;
-    List<Department> departments = departmentDao.getDepartments();
-    Department testDepartment = new Department(2,"Java", "Gomel");
+
+    List<Department> departments;
+    Department testDepartment;
+
+    @Before
+    public void setUp(){
+        departments = departmentDao.getDepartments();
+        testDepartment = new Department(8,"Java", "Gomel");
+    }
 
     @Test
     public void addDepartment() {
@@ -46,18 +53,16 @@ public class DepartmentDaoTest {
     }
 
     @Test
-    @Ignore
+    //@Ignore
     public void getDepartment() {
         String department = "Java";
-        departments.add(testDepartment);
-        Department newDepartment = departmentDao.getDepartment(department);
-        //assertThat();
+        departmentDao.addDepartment(testDepartment);
     }
 
     @Test
     public void deleteDepartment() {
         int sizeBefore = departments.size();
-        departmentDao.deleteDepartment(2);
+        departmentDao.deleteDepartment(8);
         departments = departmentDao.getDepartments();
         assertThat("Delete employee", sizeBefore - 1, lessThanOrEqualTo(departments.size()));
     }
@@ -67,4 +72,11 @@ public class DepartmentDaoTest {
         assertNotNull(departments);
         assertFalse(departments.isEmpty());
     }
+
+    @After
+    public void tearDown(){
+        departments = null;
+        testDepartment = null;
+    }
+
 }

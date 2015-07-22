@@ -3,6 +3,7 @@ package com.epam.dao.employee;
 import com.epam.model.Employee;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -18,10 +19,10 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     List<Employee> employeeList;
     static final Logger log = Logger.getLogger(EmployeeDaoImpl.class);
-    private static final String addEmployeeSql = "insert into employee (employee_id,firstName,lastName,address,position, departmentId, salary) values (?,?,?,?,?,?,?)";
-    private static final String updateEmployeeSql = "update employee set firstName=?, lastName=?, address=?,position=?,departmentId=?, salary=? where employee_id=?";
-    private static final String deleteEmployeeSql = "delete from employee where employee_id=?";
-    private static final String getEmployeeSql = "select * from employee";
+    private static final String addEmployeeSql = "insert into employee (employeeId,firstName,lastName,address,position, departmentId, salary) values (?,?,?,?,?,?,?)";
+    private static final String updateEmployeeSql = "update employee set firstName=?, lastName=?, address=?,position=?,departmentId=?, salary=? where employeeId=?";
+    private static final String deleteEmployeeSql = "delete from employee where employeeId=?";
+    private static final String getEmployeeSql = "select * from employee order by firstName";
     private static final String getEmployeeByFirstNameSql = "select * from employee where firstName=?";
 
     private JdbcTemplate jdbcTemplate;
@@ -36,31 +37,24 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public void addEmployee(Employee employee) {
         log.debug("Add employee in employee table");
-        jdbcTemplate.update(addEmployeeSql, new Object[]{employee.getEmployee_id(), employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getPosition(), employee.getDepartmentId(),employee.getSalary()});
+        jdbcTemplate.update(addEmployeeSql, new Object[]{employee.getEmployeeId(), employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getPosition(), employee.getDepartmentId(),employee.getSalary()});
     }
 
     @Override
     public void updateEmployee(Employee employee) {
         log.debug("Update employee in employee table");
-        if (employee.getEmployee_id() > 0) {
+        if (employee.getEmployeeId() > 0) {
             // update
-            jdbcTemplate.update(updateEmployeeSql, employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getPosition(), employee.getDepartmentId(),employee.getSalary(), employee.getEmployee_id());
+            jdbcTemplate.update(updateEmployeeSql, employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getPosition(), employee.getDepartmentId(),employee.getSalary(), employee.getEmployeeId());
         } else {
             addEmployee(employee);
         }
     }
 
     @Override
-    public Employee getEmployee(String name) {
+    public List<Employee> getEmployeeByFirstName(String name) {
         log.debug("Get employee by name");
-        /*List<Employee> empoloyeeList = employeeDa;
-        for (Employee p : empoloyeeList) {
-            if (oldest == null || p.getAge() > oldest.getAge()) oldest = p;
-        }*/
-        employeeList = jdbcTemplate.query(getEmployeeByFirstNameSql, new EmployeeRowMapper(), name);
-        return employeeList.get(0);
-        /*Employee empoloyee = jdbcTemplate.queryForObject(getEmployeeByFirstNameSql, new Object[]{name}, new EmployeeRowMapper());
-        return empoloyee;*/
+        return jdbcTemplate.query(getEmployeeByFirstNameSql,new Object[]{name}, new BeanPropertyRowMapper(Employee.class));
     }
 
     @Override
@@ -71,7 +65,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public List<Employee> getEmployees() {
-        employeeList = jdbcTemplate.query(getEmployeeSql, new EmployeeRowMapper());
-        return employeeList;
+        log.debug("Get all employees");
+        return jdbcTemplate.query(getEmployeeSql, new BeanPropertyRowMapper(Employee.class));
     }
 }

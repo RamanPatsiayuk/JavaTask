@@ -8,7 +8,7 @@ public class Employee {
 
 
 
-    private int employee_id;
+    private int employeeId;
     private String firstName;
     private String lastName;
     private String address;
@@ -19,8 +19,8 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(int employee_id, String firstName, String lastName, String address, String title, int departmentId,double salary) {
-        this.employee_id = employee_id;
+    public Employee(int employeeId, String firstName, String lastName, String address, String title, int departmentId,double salary) {
+        this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -29,12 +29,12 @@ public class Employee {
         this.salary = salary;
     }
 
-    public int getEmployee_id() {
-        return employee_id;
+    public int getEmployeeId() {
+        return employeeId;
     }
 
-    public void setEmployee_id(int employee_id) {
-        this.employee_id = employee_id;
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
     public String getFirstName() {
         return firstName;
@@ -93,7 +93,7 @@ public class Employee {
         }
 
         Employee empl = (Employee) other;
-        return (this.employee_id == empl.employee_id) && (this.firstName != null && firstName.equals(empl.firstName)) &&
+        return (this.employeeId == empl.employeeId) && (this.firstName != null && firstName.equals(empl.firstName)) &&
                 (this.lastName != null && lastName.equals(empl.lastName)) && (this.address != null && address.equals(empl.address))
                 && (this.position != null && position.equals(empl.position)) && (departmentId == empl.departmentId)&&(this.salary == empl.salary);
     }
@@ -102,7 +102,7 @@ public class Employee {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + employee_id;
+        result = prime * result + employeeId;
         result = prime * result + (firstName != null ? firstName.hashCode() : 0);
         result = prime * result + (lastName != null ? lastName.hashCode() : 0);
         result = prime * result + (address != null ? address.hashCode() : 0);

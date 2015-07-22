@@ -1,8 +1,10 @@
 package com.epam.dao.department;
 
 import com.epam.model.Department;
+import com.epam.model.Employee;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +23,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     private static final String updateDepartmentSql = "update department set department=?,location=? where departmentId=?";
     private static final String deleteDepartmentSql = "delete from department where departmentId=?";
     private static final String getDepartmentSql = "select * from department";
-    private static final String getDepartmentByFirstNameSql = "select * from department where departmentId=?";
+    private static final String getDepartmentByNameSql = "select * from department where department=?";
 
     private JdbcTemplate jdbcTemplate;
 
@@ -43,7 +45,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
         log.debug("Update department in department table");
         if (department.getDepartmentId() > 0) {
             // update
-            jdbcTemplate.update(updateDepartmentSql, department.getDepartment(), department.getLocation());
+            jdbcTemplate.update(updateDepartmentSql, department.getDepartment(), department.getLocation(),department.getDepartmentId());
         } else {
             addDepartment(department);
         }
@@ -52,7 +54,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     @Override
     public Department getDepartment(String name) {
         log.debug("Get department from department table");
-        return null;
+        return (Department) jdbcTemplate.query(getDepartmentByNameSql,new Object[]{name}, new BeanPropertyRowMapper(Department.class));
     }
 
     @Override
@@ -63,7 +65,6 @@ public class DepartmentDaoImpl implements DepartmentDao {
 
     @Override
     public List<Department> getDepartments() {
-        departmentList = jdbcTemplate.query(getDepartmentSql, new DepartmentRowMapper());
-        return departmentList;
+        return jdbcTemplate.query(getDepartmentSql, new BeanPropertyRowMapper(Department.class));
     }
 }
