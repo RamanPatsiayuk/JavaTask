@@ -52,9 +52,9 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
 
     @Override
-    public Department getDepartment(String name) {
+    public List<Department> getDepartmentByDepartment(String name) {
         log.debug("Get department from department table");
-        return (Department) jdbcTemplate.query(getDepartmentByNameSql,new Object[]{name}, new BeanPropertyRowMapper(Department.class));
+        return jdbcTemplate.query(getDepartmentByNameSql,new Object[]{name}, new BeanPropertyRowMapper(Department.class));
     }
 
     @Override

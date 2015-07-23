@@ -6,5 +6,6 @@ lastName varchar(255) NOT NULL,
 address varchar(255) NOT NULL,
 position varchar(255) NOT NULL,
 departmentId INT NOT NULL REFERENCES Department(departmentId),
-salary double NOT NULL
+salary double NOT NULL,
+constraint employeeId_un unique(employeeId)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;

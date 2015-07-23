@@ -2,7 +2,6 @@ package com.epam.dao;
 
 import com.epam.dao.department.DepartmentDao;
 import com.epam.model.Department;
-import com.epam.model.Employee;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -34,7 +33,7 @@ public class DepartmentDaoTest {
     @Before
     public void setUp(){
         departments = departmentDao.getDepartments();
-        testDepartment = new Department(8,"Java", "Gomel");
+        testDepartment = new Department(7,"Scala", "Gomel");
     }
 
     @Test
@@ -53,10 +52,13 @@ public class DepartmentDaoTest {
     }
 
     @Test
-    //@Ignore
+    @Ignore
     public void getDepartment() {
-        String department = "Java";
+        String department = "Scala";
         departmentDao.addDepartment(testDepartment);
+        departments = departmentDao.getDepartments();
+        List<Department> dep = departmentDao.getDepartmentByDepartment(department);
+        assertTrue(departments.contains(dep));
     }
 
     @Test

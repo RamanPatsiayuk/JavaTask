@@ -13,7 +13,7 @@ public interface DepartmentDao {
 
     public void updateDepartment(Department department);
 
-    public Department getDepartment(String name);
+    public List<Department> getDepartmentByDepartment(String name);
 
     public void deleteDepartment(int id);
 

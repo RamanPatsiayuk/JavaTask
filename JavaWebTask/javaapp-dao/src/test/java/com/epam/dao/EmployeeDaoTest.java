@@ -31,17 +31,19 @@ public class EmployeeDaoTest {
     public EmployeeDao employeeDao;
 
     Employee testEmployee;
+    Employee testEmployee1;
 
     @Before
     public void setUp(){
         testEmployee =  new Employee(10, "Vasia", "Pupkin", "Brest, Green Street", "SE", 2,600);
+        testEmployee1 = new Employee(7, "Vasia", "Pupkin", "Brest, Green Street", "SE", 4, 600);
     }
 
     @Test
     public void addEmployee() {
         List<Employee> employees = employeeDao.getEmployees();
         int sizeBefore = employees.size();
-        employeeDao.addEmployee(testEmployee);
+        employeeDao.addEmployee(testEmployee1);
         employees = employeeDao.getEmployees();
         assertThat(sizeBefore + 1,greaterThanOrEqualTo(employees.size()));
     }
@@ -61,7 +63,6 @@ public class EmployeeDaoTest {
         List<Employee> employees = employeeDao.getEmployees();
         employeeDao.addEmployee(testEmployee);
         assertTrue(employeeDao.getEmployeeByFirstName(firstName).contains(testEmployee));
-        //assertThat(employees, contains(testEmployee));//equalTo(testEmployee));
     }
 
     @Test
@@ -84,5 +85,6 @@ public class EmployeeDaoTest {
     public void tearDown(){
         employeeDao = null;
         testEmployee = null;
+        testEmployee1 = null;
     }
 }
