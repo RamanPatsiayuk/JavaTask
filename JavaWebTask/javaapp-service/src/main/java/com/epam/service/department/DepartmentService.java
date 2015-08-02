@@ -1,4 +1,4 @@
-package com.epam.dao.department;
+package com.epam.service.department;
 
 import com.epam.model.Department;
 
@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Roman
  */
-public interface DepartmentDao {
+public interface DepartmentService {
 
     public void addDepartment(Department department);
 

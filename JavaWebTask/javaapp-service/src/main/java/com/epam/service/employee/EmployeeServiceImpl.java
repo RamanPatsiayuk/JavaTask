@@ -1,14 +1,18 @@
-package com.epam.service;
+package com.epam.service.employee;
 
 import com.epam.dao.employee.EmployeeDao;
 import com.epam.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * Created by Roman
  */
+@Service("employeeService")
+@Transactional
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
@@ -21,7 +25,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void updateEmployee(Employee employee) {
-        employeeDao.updateEmployee(employee);
+        if(employee.getFirstName() != null){
+            employeeDao.updateEmployee(employee);
+        }
     }
 
     @Override

@@ -57,7 +57,7 @@ public class DepartmentDaoTest {
         String department = "Scala";
         departmentDao.addDepartment(testDepartment);
         departments = departmentDao.getDepartments();
-        List<Department> dep = departmentDao.getDepartmentByDepartment(department);
+        List<Department> dep = departmentDao.getDepartmentByName(department);
         assertTrue(departments.contains(dep));
     }
 
