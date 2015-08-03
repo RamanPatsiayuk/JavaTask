@@ -14,6 +14,8 @@
         <module>javaapp-model</module>
         <module>javaapp-service</module>
         <module>javaapp-dao</module>
+        <module>javaapp-rest</module>
+        <module>javaapp-webcontent</module>
     </modules>
 
     <distributionManagement>
@@ -47,6 +49,16 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>javaapp-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>javaapp-rest</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>javaapp-webcontent</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -179,7 +191,7 @@
                 <artifactId>maven-pmd-plugin</artifactId>
                 <version>3.5</version>
                 <configuration>
-                    <linkXref>true</linkXref>
+                    <!--<linkXref>true</linkXref>-->
                     <sourceEncoding>utf-8</sourceEncoding>
                     <minimumTokens>100</minimumTokens>
                     <targetJdk>1.7</targetJdk>
@@ -192,8 +204,7 @@
                         </reports>
                     </reportSet>
                 </reportSets>
-            </plugin>
-            <plugin>
+
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>
                 <version>2.8</version>

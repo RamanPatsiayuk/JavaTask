@@ -1,7 +1,6 @@
 package com.epam.dao.department;
 
 import com.epam.model.Department;
-import com.epam.model.Employee;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -52,7 +51,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
 
     @Override
-    public List<Department> getDepartmentByDepartment(String name) {
+    public List<Department> getDepartmentByName(String name) {
         log.debug("Get department from department table");
         return jdbcTemplate.query(getDepartmentByNameSql,new Object[]{name}, new BeanPropertyRowMapper(Department.class));
     }
