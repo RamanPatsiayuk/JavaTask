@@ -1,7 +1,7 @@
 package com.epam.service.employee;
 
 /**
- * Created by Roman on 02/08/15.
+ * Created by Roman
  */
 public class EmployeeServiceTest {
 }
