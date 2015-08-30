@@ -1,11 +1,9 @@
 package com.epam.dao;
 
 import com.epam.dao.employee.EmployeeDao;
-import com.epam.model.Department;
 import com.epam.model.Employee;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,11 +30,22 @@ public class EmployeeDaoTest {
 
     Employee testEmployee;
     Employee testEmployee1;
+    Employee testEmployee2;
 
     @Before
     public void setUp(){
         testEmployee =  new Employee(10, "Vasia", "Pupkin", "Brest, Green Street", "SE", 2,600);
-        testEmployee1 = new Employee(7, "Vasia", "Pupkin", "Brest, Green Street", "SE", 4, 600);
+        testEmployee1 = new Employee(7, "Dima", "Pupkin", "Brest, Green Street", "SE", 4, 600);
+        testEmployee2 = new Employee(11, "Dasha", "Sidorova", "Brest, Sovetskaya street", "SSE", 3,700);
+    }
+
+    @Test
+    public void insertEmployee() {
+        List<Employee> employees = employeeDao.getEmployees();
+        int sizeBefore = employees.size();
+        employeeDao.insertEmployee(testEmployee2);
+        employees = employeeDao.getEmployees();
+        assertThat(sizeBefore + 1,greaterThanOrEqualTo(employees.size()));
     }
 
     @Test
@@ -57,12 +66,18 @@ public class EmployeeDaoTest {
     }
 
     @Test
-    //@Ignore
-    public void getEmployee() {
-        String firstName = "Vasia";
-        List<Employee> employees = employeeDao.getEmployees();
-        employeeDao.addEmployee(testEmployee);
-        assertTrue(employeeDao.getEmployeeByFirstName(firstName).contains(testEmployee));
+    public void getEmployeeByFirstName() {
+        String firstName = "Dasha";
+        employeeDao.addEmployee(testEmployee2);
+        List<Employee> empByFirstName = employeeDao.getEmployeeByFirstName(firstName);
+        assertThat(empByFirstName.size(), greaterThanOrEqualTo(1));
+    }
+
+    @Test
+    public void getEmployeeById() {
+        employeeDao.addEmployee(testEmployee2);
+        Employee emp = employeeDao.getEmployeeById(testEmployee2.getEmployeeId());
+        assertTrue(emp.equals(testEmployee2));
     }
 
     @Test
@@ -86,5 +101,6 @@ public class EmployeeDaoTest {
         employeeDao = null;
         testEmployee = null;
         testEmployee1 = null;
+        testEmployee2 = null;
     }
 }

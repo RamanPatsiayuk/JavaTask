@@ -9,8 +9,12 @@ import java.util.List;
  */
 public interface EmployeeService {
     public void addEmployee(Employee employee);
+
     public void updateEmployee(Employee employee);
+
     public List<Employee> getEmployeeByFirstName(String name);
+
     public void deleteEmployee(int id);
+
     public List<Employee> getEmployees();
 }
