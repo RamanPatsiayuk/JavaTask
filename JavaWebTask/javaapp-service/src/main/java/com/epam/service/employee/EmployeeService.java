@@ -8,6 +8,8 @@ import java.util.List;
  * Created by Roman
  */
 public interface EmployeeService {
+    public int insertEmployee(Employee employee);
+
     public void addEmployee(Employee employee);
 
     public void updateEmployee(Employee employee);
@@ -17,4 +19,6 @@ public interface EmployeeService {
     public void deleteEmployee(int id);
 
     public List<Employee> getEmployees();
+
+    public Employee getEmployeeById(int id);
 }
