@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -29,11 +30,22 @@ public class DepartmentDaoTest {
 
     List<Department> departments;
     Department testDepartment;
+    Department testDepartment1;
 
     @Before
     public void setUp(){
         departments = departmentDao.getDepartments();
         testDepartment = new Department(7,"Scala", "Gomel");
+        testDepartment1 = new Department(9,"Haskell", "Gomel");
+    }
+
+    @Test
+    public void insertDepartment() {
+        departments = departmentDao.getDepartments();
+        int sizeBefore = departments.size();
+        departmentDao.insertDepartment(testDepartment);
+        departments = departmentDao.getDepartments();
+        assertThat(sizeBefore + 1,greaterThanOrEqualTo(departments.size()));
     }
 
     @Test
@@ -52,13 +64,20 @@ public class DepartmentDaoTest {
     }
 
     @Test
-    @Ignore
-    public void getDepartment() {
+    public void getDepartmentByName() {
         String department = "Scala";
         departmentDao.addDepartment(testDepartment);
-        departments = departmentDao.getDepartments();
         List<Department> dep = departmentDao.getDepartmentByName(department);
-        assertTrue(departments.contains(dep));
+        assertTrue(dep.size()>0);
+    }
+
+    @Test
+    @Ignore
+    public void getDepartmentById() {
+        departmentDao.addDepartment(testDepartment1);
+        departments = departmentDao.getDepartments();
+        Department dep = departmentDao.getDepartmentById(9);
+        assertTrue(dep.equals(testDepartment1));
     }
 
     @Test
@@ -79,6 +98,7 @@ public class DepartmentDaoTest {
     public void tearDown(){
         departments = null;
         testDepartment = null;
+        testDepartment1 = null;
     }
 
 }

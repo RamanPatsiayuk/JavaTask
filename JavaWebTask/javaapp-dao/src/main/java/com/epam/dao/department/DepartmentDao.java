@@ -8,6 +8,8 @@ import java.util.List;
  * Created by Roman
  */
 public interface DepartmentDao {
+    
+    public int insertDepartment(Department department);
 
     public void addDepartment(Department department);
 
@@ -18,5 +20,7 @@ public interface DepartmentDao {
     public void deleteDepartment(int id);
 
     public List<Department> getDepartments();
+
+    public Department getDepartmentById(int id);
 
 }
