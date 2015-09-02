@@ -31,12 +31,16 @@ public class EmployeeDaoTest {
     Employee testEmployee;
     Employee testEmployee1;
     Employee testEmployee2;
+    Employee testEmployee3;
+    Employee testEmployee4;
 
     @Before
     public void setUp(){
         testEmployee =  new Employee(10, "Vasia", "Pupkin", "Brest, Green Street", "SE", 2,600);
         testEmployee1 = new Employee(7, "Dima", "Pupkin", "Brest, Green Street", "SE", 4, 600);
         testEmployee2 = new Employee(11, "Dasha", "Sidorova", "Brest, Sovetskaya street", "SSE", 3,700);
+        testEmployee3 = new Employee(14, "Masha", "Dudkina", "Brest, Krasnogvardeiskaya street", "LSE", 5,720);
+        testEmployee4 = new Employee(15, "Sasha", "Baranov", "Minsk, Voronianskogo street", "JTAE", 5,420);
     }
 
     @Test
@@ -67,17 +71,17 @@ public class EmployeeDaoTest {
 
     @Test
     public void getEmployeeByFirstName() {
-        String firstName = "Dasha";
-        employeeDao.addEmployee(testEmployee2);
+        String firstName = "Masha";
+        employeeDao.addEmployee(testEmployee3);
         List<Employee> empByFirstName = employeeDao.getEmployeeByFirstName(firstName);
         assertThat(empByFirstName.size(), greaterThanOrEqualTo(1));
     }
 
     @Test
     public void getEmployeeById() {
-        employeeDao.addEmployee(testEmployee2);
-        Employee emp = employeeDao.getEmployeeById(testEmployee2.getEmployeeId());
-        assertTrue(emp.equals(testEmployee2));
+        employeeDao.addEmployee(testEmployee4);
+        Employee emp = employeeDao.getEmployeeById(testEmployee4.getEmployeeId());
+        assertTrue(emp.equals(testEmployee4));
     }
 
     @Test
@@ -102,5 +106,7 @@ public class EmployeeDaoTest {
         testEmployee = null;
         testEmployee1 = null;
         testEmployee2 = null;
+        testEmployee3 = null;
+        testEmployee4 = null;
     }
 }
