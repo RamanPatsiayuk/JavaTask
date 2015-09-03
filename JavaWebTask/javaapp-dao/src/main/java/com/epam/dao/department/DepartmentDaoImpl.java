@@ -27,7 +27,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     private static final String updateDepartmentSql = "update department set department=?,location=? where departmentId=?";
     private static final String deleteDepartmentSql = "delete from department where departmentId=?";
     private static final String getDepartmentSql = "select * from department";
-    private static final String getDepartmentByNameSql = "select * from department where department=?";
+    private static final String getDepartmentByNameSql = "select * from department where LOWER(department)=?";
     private static final String getDepartmentById = "select * from department where departmentId=?";
 
     private JdbcTemplate jdbcTemplate;
