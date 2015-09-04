@@ -13,13 +13,13 @@ public class Department {
 
     }
 
-    public Department(int id, String department, String location) {
+    public Department(Integer id, String department, String location) {
         this.departmentId = id;
         this.department = department;
         this.location = location;
     }
 
-    public int getDepartmentId() {
+    public Integer getDepartmentId() {
         return departmentId;
     }
 

@@ -23,7 +23,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     static final Logger log = Logger.getLogger(DepartmentDaoImpl.class);
 
     private static final String insertDepartmentSql = "insert into department (department, location) values (:department, :location)";
-    private static final String addDepartmentSql = "insert into department (department, location) values (?,?)";
+    //private static final String addDepartmentSql = "insert into department (department, location) values (?,?)";
     private static final String updateDepartmentSql = "update department set department=?,location=? where departmentId=?";
     private static final String deleteDepartmentSql = "delete from department where departmentId=?";
     private static final String getDepartmentSql = "select * from department";
@@ -42,7 +42,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
 
     @Override
-    public int insertDepartment(Department department) {
+    public int insertDepartment(final Department department) {
         log.debug("Add department in department table");
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(insertDepartmentSql, new BeanPropertySqlParameterSource(department), keyHolder);
@@ -50,24 +50,13 @@ public class DepartmentDaoImpl implements DepartmentDao {
     }
 
     @Override
-    public void addDepartment(Department department) {
-        log.debug("Add department in department table");
-        jdbcTemplate.update(addDepartmentSql, new Object[]{department.getDepartment(), department.getLocation()});
-    }
-
-    @Override
-    public void updateDepartment(Department department) {
+    public void updateDepartment(final Department department) {
         log.debug("Update department in department table");
-        if (department.getDepartmentId() > 0) {
-            // update
-            jdbcTemplate.update(updateDepartmentSql, department.getDepartment(), department.getLocation(), department.getDepartmentId());
-        } else {
-            addDepartment(department);
-        }
+        jdbcTemplate.update(updateDepartmentSql, department.getDepartment().toLowerCase(), department.getLocation(), department.getDepartmentId());
     }
 
     @Override
-    public List<Department> getDepartmentByName(String name) {
+    public List<Department> getDepartmentByName(final String name) {
         log.debug("Get department from department table");
         return jdbcTemplate.query(getDepartmentByNameSql, new Object[]{name}, new BeanPropertyRowMapper(Department.class));
     }

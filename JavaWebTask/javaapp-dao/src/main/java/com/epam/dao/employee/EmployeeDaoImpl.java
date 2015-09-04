@@ -23,7 +23,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     static final Logger log = Logger.getLogger(EmployeeDaoImpl.class);
     private static final String insertEmployeeSql = "insert into employee (employeeId,firstName,lastName,address,position, departmentId, salary) values (:employeeId,:firstName,:lastName,:address,:position, :departmentId, :salary)";
-    private static final String addEmployeeSql = "insert into employee (employeeId,firstName,lastName,address,position, departmentId, salary) values (?,?,?,?,?,?,?)";
+    //private static final String addEmployeeSql = "insert into employee (employeeId,firstName,lastName,address,position, departmentId, salary) values (?,?,?,?,?,?,?)";
     private static final String updateEmployeeSql = "update employee set firstName=?, lastName=?, address=?,position=?,departmentId=?, salary=? where employeeId=?";
     private static final String deleteEmployeeSql = "delete from employee where employeeId=?";
     private static final String getEmployeeSql = "select * from employee order by firstName";
@@ -59,7 +59,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }*/
 
     @Override
-    public int insertEmployee(Employee employee) {
+    public int insertEmployee(final Employee employee) {
         log.debug("Add employee in employee table");
         KeyHolder keyHolder = new GeneratedKeyHolder();
         namedParameterJdbcTemplate.update(insertEmployeeSql, new BeanPropertySqlParameterSource(employee), keyHolder);
@@ -67,24 +67,13 @@ public class EmployeeDaoImpl implements EmployeeDao {
     }
 
     @Override
-    public void addEmployee(Employee employee) {
-        log.debug("Add employee in employee table");
-        jdbcTemplate.update(addEmployeeSql, new Object[]{employee.getEmployeeId(), employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getPosition(), employee.getDepartmentId(),employee.getSalary()});
-    }
-
-    @Override
-    public void updateEmployee(Employee employee) {
+    public void updateEmployee(final Employee employee) {
         log.debug("Update employee in employee table");
-        if (employee.getEmployeeId() > 0) {
-            // update
-            jdbcTemplate.update(updateEmployeeSql, employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getPosition(), employee.getDepartmentId(),employee.getSalary(), employee.getEmployeeId());
-        } else {
-            addEmployee(employee);
-        }
+        jdbcTemplate.update(updateEmployeeSql, employee.getFirstName(), employee.getLastName(), employee.getAddress(), employee.getPosition(), employee.getDepartmentId(),employee.getSalary(), employee.getEmployeeId());
     }
 
     @Override
-    public List<Employee> getEmployeeByFirstName(String name) {
+    public List<Employee> getEmployeeByFirstName(final String name) {
         log.debug("Get employee by name");
         return jdbcTemplate.query(getEmployeeByFirstNameSql,new Object[]{name}, new BeanPropertyRowMapper(Employee.class));
     }

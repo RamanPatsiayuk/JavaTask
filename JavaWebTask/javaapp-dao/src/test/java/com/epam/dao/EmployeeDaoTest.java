@@ -53,15 +53,6 @@ public class EmployeeDaoTest {
     }
 
     @Test
-    public void addEmployee() {
-        List<Employee> employees = employeeDao.getEmployees();
-        int sizeBefore = employees.size();
-        employeeDao.addEmployee(testEmployee1);
-        employees = employeeDao.getEmployees();
-        assertThat(sizeBefore + 1,greaterThanOrEqualTo(employees.size()));
-    }
-
-    @Test
     public void updateEmployee() {
         List<Employee> employees = employeeDao.getEmployees();
         employeeDao.updateEmployee(testEmployee);
@@ -72,14 +63,14 @@ public class EmployeeDaoTest {
     @Test
     public void getEmployeeByFirstName() {
         String firstName = "Masha";
-        employeeDao.addEmployee(testEmployee3);
+        employeeDao.insertEmployee(testEmployee3);
         List<Employee> empByFirstName = employeeDao.getEmployeeByFirstName(firstName);
         assertThat(empByFirstName.size(), greaterThanOrEqualTo(1));
     }
 
     @Test
     public void getEmployeeById() {
-        employeeDao.addEmployee(testEmployee4);
+        employeeDao.insertEmployee(testEmployee4);
         Employee emp = employeeDao.getEmployeeById(testEmployee4.getEmployeeId());
         assertTrue(emp.equals(testEmployee4));
     }

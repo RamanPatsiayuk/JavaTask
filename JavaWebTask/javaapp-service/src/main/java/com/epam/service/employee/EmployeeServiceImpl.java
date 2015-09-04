@@ -27,14 +27,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeDao employeeDao;
 
     @Override
-    public int insertEmployee(Employee employee) {
+    public int insertEmployee(final Employee employee) {
         log.debug("Insert employee in employee table");
-        assertThat(employee.getEmployeeId(), is(notNullValue()));
         assertThat(employee.getFirstName(), is(notNullValue()));
         assertThat(employee.getLastName(), is(notNullValue()));
         assertThat(employee.getAddress(), is(notNullValue()));
         assertThat(employee.getPosition(), is(notNullValue()));
-        assertThat(employee.getDepartmentId(), is(notNullValue()));
         assertThat(employee.getSalary(), is(notNullValue()));
         Employee exEmployee = getEmployeeById(employee.getEmployeeId());
         if (exEmployee != null) {
@@ -44,24 +42,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void addEmployee(Employee employee) {
-        log.debug("Update employee in employee table");
-        Employee exEmployee = getEmployeeById(employee.getEmployeeId());
-        if (exEmployee != null) {
-            throw new IllegalArgumentException("Object is existing in Employee database");
-        }
-        employeeDao.addEmployee(employee);
-    }
-
-    @Override
-    public void updateEmployee(Employee employee) {
+    public void updateEmployee(final Employee employee) {
         if(employee.getFirstName() != null & employee.getLastName() != null){
             employeeDao.updateEmployee(employee);
         }
     }
 
     @Override
-    public List<Employee> getEmployeeByFirstName(String name) {
+    public List<Employee> getEmployeeByFirstName(final String name) {
         log.debug("getEmployeeByFirstName" + name);
         List<Employee> listEmployee = null;
         try {
@@ -81,7 +69,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employee> getEmployees() {
         log.debug("Get all employees");
-         return employeeDao.getEmployees();
+        List<Employee> employees = employeeDao.getEmployees();
+        if(employees.size()<0){
+            throw new IllegalArgumentException("Table employees is empty");
+        }
+        return employees;
     }
 
     @Override

@@ -29,7 +29,6 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public int insertDepartment(Department department) {
         log.debug("Insert department in department table");
-        assertThat(department.getDepartmentId(), is(notNullValue()));
         assertThat(department.getDepartment(), is(notNullValue()));
         assertThat(department.getLocation(), is(notNullValue()));
         List<Department> exDepartment = getDepartmentByName(department.getDepartment());
@@ -37,12 +36,6 @@ public class DepartmentServiceImpl implements DepartmentService {
             throw new IllegalArgumentException("Object is existing in Department database");
         }
         return departmentDao.insertDepartment(department);
-    }
-
-    @Override
-    public void addDepartment(Department department) {
-        log.debug("Add department in department table");
-        departmentDao.addDepartment(department);
     }
 
     @Override

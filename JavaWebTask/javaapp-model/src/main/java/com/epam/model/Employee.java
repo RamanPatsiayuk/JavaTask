@@ -6,18 +6,18 @@ package com.epam.model;
 
 public class Employee {
 
-    private int employeeId;
+    private Integer employeeId;
     private String firstName;
     private String lastName;
     private String address;
     private String position;
-    private int departmentId;
+    private Integer departmentId;
     private double salary;
 
     public Employee() {
     }
 
-    public Employee(int employeeId, String firstName, String lastName, String address, String title, int departmentId,double salary) {
+    public Employee(Integer employeeId, String firstName, String lastName, String address, String title, Integer departmentId,double salary) {
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -27,13 +27,14 @@ public class Employee {
         this.salary = salary;
     }
 
-    public int getEmployeeId() {
+    public Integer getEmployeeId() {
         return employeeId;
     }
 
-    public void setEmployeeId(int employeeId) {
+    public void setEmployeeId(Integer employeeId) {
         this.employeeId = employeeId;
     }
+
     public String getFirstName() {
         return firstName;
     }
@@ -66,11 +67,11 @@ public class Employee {
         this.position = position;
     }
 
-    public int getDepartmentId() {
+    public Integer getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(int departmentId) {
+    public void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;
     }
 

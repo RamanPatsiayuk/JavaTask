@@ -11,7 +11,7 @@ public interface DepartmentDao {
     
     public int insertDepartment(Department department);
 
-    public void addDepartment(Department department);
+    //public void addDepartment(Department department);
 
     public void updateDepartment(Department department);
 
