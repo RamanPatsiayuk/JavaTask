@@ -15,7 +15,7 @@ public class DepartmentExtractor implements ResultSetExtractor<Department> {
     public Department extractData(ResultSet resultSet) throws SQLException, DataAccessException {
         Department department = new Department();
         department.setDepartmentId(resultSet.getInt(1));
-        department.setDepartment(resultSet.getString(2));
+        department.setDepartmentName(resultSet.getString(2));
         department.setLocation(resultSet.getString(3));
         return department;
     }

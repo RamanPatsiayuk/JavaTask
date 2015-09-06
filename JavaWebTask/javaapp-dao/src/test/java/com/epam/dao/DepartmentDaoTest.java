@@ -2,10 +2,7 @@ package com.epam.dao;
 
 import com.epam.dao.department.DepartmentDao;
 import com.epam.model.Department;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -16,14 +13,13 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.number.OrderingComparison.greaterThanOrEqualTo;
 import static org.hamcrest.number.OrderingComparison.lessThanOrEqualTo;
-import static org.junit.Assert.*;
 
 /**
  * Created by Roman
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:/testDaoSpringContext.xml"})
-public class DepartmentDaoTest {
+public class DepartmentDaoTest extends Assert {
 
     @Autowired
     public DepartmentDao departmentDao;

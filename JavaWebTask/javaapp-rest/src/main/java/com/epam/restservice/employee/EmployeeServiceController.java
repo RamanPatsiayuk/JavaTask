@@ -26,7 +26,7 @@ public class EmployeeServiceController {
     @RequestMapping(value = { "/employee/addedEmployee" }, method = RequestMethod.POST)
     public @ResponseBody List<Employee> addEmployee(@RequestBody Employee emp,ModelMap model) {
         log.info("Start add employee");
-        employeeService.addEmployee(emp);
+        employeeService.insertEmployee(emp);
         List<Employee> employees = employeeService.getEmployees();
         model.addAttribute("employee", employees);
         model.addAttribute("edit", false);

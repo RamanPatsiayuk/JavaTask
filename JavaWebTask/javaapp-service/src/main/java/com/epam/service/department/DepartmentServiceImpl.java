@@ -29,9 +29,9 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public int insertDepartment(Department department) {
         log.debug("Insert department in department table");
-        assertThat(department.getDepartment(), is(notNullValue()));
+        assertThat(department.getDepartmentName(), is(notNullValue()));
         assertThat(department.getLocation(), is(notNullValue()));
-        List<Department> exDepartment = getDepartmentByName(department.getDepartment());
+        List<Department> exDepartment = getDepartmentByName(department.getDepartmentName());
         if (exDepartment != null) {
             throw new IllegalArgumentException("Object is existing in Department database");
         }
