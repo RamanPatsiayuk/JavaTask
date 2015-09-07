@@ -1,8 +1,6 @@
 package com.epam.model;
 
-import org.hamcrest.core.Is;
 import org.hamcrest.core.IsEqual;
-import org.hamcrest.core.IsNot;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -31,8 +29,8 @@ public class DepartmentTest extends Assert {
     @Test
     public void testGetDepartment() throws Exception {
         String expected = ".Net";
-        department.setDepartment(".Net");
-        assertThat(department.getDepartment(), IsEqual.equalTo(expected));
+        department.setDepartmentName(".Net");
+        assertThat(department.getDepartmentName(), IsEqual.equalTo(expected));
     }
 
     @Test

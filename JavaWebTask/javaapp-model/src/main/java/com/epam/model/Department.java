@@ -6,16 +6,16 @@ package com.epam.model;
 public class Department {
 
     private Integer departmentId;
-    private String department;
+    private String departmentName;
     private String location;
 
     public Department(){
 
     }
 
-    public Department(Integer id, String department, String location) {
+    public Department(Integer id, String departmentName, String location) {
         this.departmentId = id;
-        this.department = department;
+        this.departmentName = departmentName;
         this.location = location;
     }
 
@@ -27,12 +27,12 @@ public class Department {
         this.departmentId = departmentId;
     }
 
-    public String getDepartment() {
-        return department;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
     public String getLocation() {
@@ -52,7 +52,7 @@ public class Department {
         }
 
         Department department = (Department) other;
-        return (this.departmentId == department.departmentId) && (this.department != null && department.equals(department.department)) &&
+        return (this.departmentId == department.departmentId) && (this.departmentName != null && department.equals(department.departmentName)) &&
                 (this.location != null && location.equals(department.location));
     }
 
@@ -61,7 +61,7 @@ public class Department {
         final int prime = 31;
         int result = 1;
         result = prime * result + departmentId;
-        result = prime * result + (department != null ? department.hashCode() : 0);
+        result = prime * result + (departmentName != null ? departmentName.hashCode() : 0);
         result = prime * result + (location != null ? location.hashCode() : 0);
         return result;
     }
