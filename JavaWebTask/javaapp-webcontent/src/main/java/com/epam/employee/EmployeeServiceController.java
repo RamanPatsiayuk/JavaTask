@@ -26,7 +26,7 @@ public class EmployeeServiceController {
     @RequestMapping(value = { "/addedEmployee" }, method = RequestMethod.POST)
     public String addEmployee(Employee employee) {
         if (employee.getFirstName() != null)
-            employeeService.addEmployee(employee);
+            employeeService.insertEmployee(employee);
         return "redirect:/getEmployeeList";
     }
 
