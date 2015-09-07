@@ -10,8 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.notNullValue;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.IsNull.notNullValue;
 
 /**
  * Created by Roman
@@ -64,5 +64,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public Department getDepartmentById(int id) {
         return departmentDao.getDepartmentById(id);
+    }
+
+    public void setDepartmentDao(com.epam.dao.department.DepartmentDaoImpl departmentDao) {
     }
 }
