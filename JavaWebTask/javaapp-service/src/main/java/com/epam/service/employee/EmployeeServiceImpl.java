@@ -73,4 +73,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         return exEmployee;
     }
+
+    public void setEmployeeDao(com.epam.dao.employee.EmployeeDaoImpl employeeDao) {
+    }
 }
