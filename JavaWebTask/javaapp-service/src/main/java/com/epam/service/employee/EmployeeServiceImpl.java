@@ -25,16 +25,20 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public int insertEmployee(final Employee employee) {
         log.debug("Insert employee in employee table");
-        Employee exEmployee = getEmployeeById(employee.getEmployeeId());
-        if (exEmployee != null) {
-            throw new IllegalArgumentException("Object is existing in Employee database");
+        if (employee == null) {
+            throw new IllegalArgumentException("Employee is null");
+        } else {
+            List<Employee> exEmployee = employeeDao.getEmployeeByFirstName(employee.getFirstName());
+            if (exEmployee != null) {
+                throw new IllegalArgumentException();
+            }
         }
         return employeeDao.insertEmployee(employee);
     }
 
     @Override
     public void updateEmployee(final Employee employee) {
-        if(employee.getFirstName() != null & employee.getLastName() != null){
+        if (employee.getFirstName() != null & employee.getLastName() != null) {
             employeeDao.updateEmployee(employee);
         }
     }

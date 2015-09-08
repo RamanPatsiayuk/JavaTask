@@ -9,10 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.Is.is;
-import static org.hamcrest.core.IsNull.notNullValue;
-
 /**
  * Created by Roman
  */
@@ -29,11 +25,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public int insertDepartment(final Department department) {
         log.debug("Insert department in department table");
-        assertThat(department.getDepartmentName(), is(notNullValue()));
-        assertThat(department.getLocation(), is(notNullValue()));
-        List<Department> exDepartment = getDepartmentByName(department.getDepartmentName());
-        if (exDepartment != null) {
-            throw new IllegalArgumentException("Object is existing in Department database");
+
+        if(department == null){
+            throw new IllegalArgumentException("Department is null");
+        }else{
+            List<Department> exDepartment = departmentDao.getDepartmentByName(department.getDepartmentName());
+            if (exDepartment != null) {
+                throw new IllegalArgumentException("Object is existing in Department database");
+            }
         }
         return departmentDao.insertDepartment(department);
     }

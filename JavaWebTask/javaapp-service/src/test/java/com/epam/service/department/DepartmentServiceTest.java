@@ -22,17 +22,17 @@ public class DepartmentServiceTest extends Assert {
     @Autowired
     public DepartmentService departmentService;
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void addNullDepartment() throws Exception{
         departmentService.insertDepartment(null);
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expected = NullPointerException.class)
     public void addNullDepartmentNameInDepartment() throws Exception{
         departmentService.insertDepartment(new Department(null,null,"Grodno"));
     }
 
-    @Test(expected = AssertionError.class)
+    @Test(expected = IllegalArgumentException.class)
     public void addNullLocationInDepartment() throws Exception{
         departmentService.insertDepartment(new Department(null,"Java",null));
     }
@@ -48,7 +48,7 @@ public class DepartmentServiceTest extends Assert {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void addDepartmentNameInUpperCase() throws Exception{
+    public void insertExistingDepartment() throws Exception{
         departmentService.insertDepartment(new Department(null,"JAVA","Grodno"));
     }
 
