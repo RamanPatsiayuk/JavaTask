@@ -27,7 +27,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentDao departmentDao;
 
     @Override
-    public int insertDepartment(Department department) {
+    public int insertDepartment(final Department department) {
         log.debug("Insert department in department table");
         assertThat(department.getDepartmentName(), is(notNullValue()));
         assertThat(department.getLocation(), is(notNullValue()));
@@ -45,7 +45,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public List<Department> getDepartmentByName(String name) {
+    public List<Department> getDepartmentByName(final String name) {
         log.debug("Get department from department table");
         return departmentDao.getDepartmentByName(name);
     }

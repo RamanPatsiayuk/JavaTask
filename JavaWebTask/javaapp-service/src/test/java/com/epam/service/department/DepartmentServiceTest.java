@@ -29,27 +29,27 @@ public class DepartmentServiceTest extends Assert {
 
     @Test(expected = AssertionError.class)
     public void addNullDepartmentNameInDepartment() throws Exception{
-        departmentService.insertDepartment(new Department(1,null,"Grodno"));
+        departmentService.insertDepartment(new Department(null,null,"Grodno"));
     }
 
     @Test(expected = AssertionError.class)
     public void addNullLocationInDepartment() throws Exception{
-        departmentService.insertDepartment(new Department(1,"Java",null));
+        departmentService.insertDepartment(new Department(null,"Java",null));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void addEmptyDepartmentNameInDepartment() throws Exception{
-        departmentService.insertDepartment(new Department(1,"","Grodno"));
+        departmentService.insertDepartment(new Department(null,"","Grodno"));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void addEmptyLocationInDepartment() throws Exception{
-        departmentService.insertDepartment(new Department(1,"Java",""));
+        departmentService.insertDepartment(new Department(null,"Java",""));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void addDepartmentNameInUpperCase() throws Exception{
-        departmentService.insertDepartment(new Department(2,"JAVA","Grodno"));
+        departmentService.insertDepartment(new Department(null,"JAVA","Grodno"));
     }
 
 
