@@ -54,7 +54,6 @@ public class DepartmentDaoTest extends Assert {
     }
 
     @Test
-    @Ignore
     public void getDepartmentByName() {
         String department = "PHP";
         departmentDao.insertDepartment(testDepartment2);
@@ -63,12 +62,11 @@ public class DepartmentDaoTest extends Assert {
     }
 
     @Test
-    @Ignore
     public void getDepartmentById() {
         departmentDao.insertDepartment(testDepartment1);
         departments = departmentDao.getDepartments();
-        Department dep = departmentDao.getDepartmentById(9);
-        assertTrue(dep.equals(testDepartment1));
+        Department dep = departmentDao.getDepartmentById(7);
+        assertTrue(dep.getDepartmentName() == testDepartment1.getDepartmentName());
     }
 
     @Test

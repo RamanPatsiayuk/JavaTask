@@ -1,6 +1,5 @@
 package com.epam.dao.department;
 
-import com.epam.dao.employee.EmployeeRowMapper;
 import com.epam.model.Department;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +36,10 @@ public class DepartmentDaoImpl extends NamedParameterJdbcDaoSupport implements D
     @Autowired
     public DataSource dataSource;
 
+    @Autowired
+    public DepartmentDaoImpl(DataSource dataSource) {
+        setDataSource(dataSource);
+    }
     //if we do not use NamedParameterJdbcDaoSupport we should use this code
     /*public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);

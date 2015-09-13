@@ -3,6 +3,7 @@ package com.epam.employee;
 import com.epam.model.Employee;
 import com.epam.service.employee.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,8 +19,9 @@ import java.util.List;
  */
 
 @Controller
-public class EmployeeServiceController {
+public class EmployeePageController {
 
+    @Qualifier("employeeService")
     @Autowired
     private EmployeeService employeeService;
 

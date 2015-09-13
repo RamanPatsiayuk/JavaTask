@@ -38,7 +38,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public void updateDepartment(Department department) {
+    public void updateDepartment(final Department department) {
         log.debug("Update department in department table");
         departmentDao.updateDepartment(department);
     }
