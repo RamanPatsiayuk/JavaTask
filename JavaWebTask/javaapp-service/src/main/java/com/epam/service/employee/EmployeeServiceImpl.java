@@ -31,7 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new IllegalArgumentException();
         } else {
             List<Employee> exEmployee = employeeDao.getEmployeeByFirstName(employee.getFirstName());
-            if (exEmployee != null) {
+            if ((exEmployee != null) && (exEmployee.size()>0)) {
                 throw new IllegalArgumentException();
             }
         }

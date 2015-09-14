@@ -28,9 +28,11 @@ public class DepartmentServiceImpl implements DepartmentService {
 
         if(department == null){
             throw new IllegalArgumentException("Department is null");
+        }else if(null == department.getDepartmentName()){
+            throw new IllegalArgumentException("Department name is null");
         }else{
             List<Department> exDepartment = departmentDao.getDepartmentByName(department.getDepartmentName());
-            if (exDepartment != null) {
+            if ((exDepartment != null)&&(exDepartment.size()>0)) {
                 throw new IllegalArgumentException("Object is existing in Department database");
             }
         }
