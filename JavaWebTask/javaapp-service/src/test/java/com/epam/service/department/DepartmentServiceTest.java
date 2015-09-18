@@ -50,7 +50,7 @@ public class DepartmentServiceTest extends Assert {
         departmentService.insertDepartment(null);
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void addNullDepartmentNameInDepartment() throws Exception{
         departmentService.insertDepartment(new Department(null,null,"Grodno"));
     }

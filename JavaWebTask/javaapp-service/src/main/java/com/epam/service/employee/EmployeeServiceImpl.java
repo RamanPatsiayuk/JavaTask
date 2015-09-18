@@ -27,7 +27,15 @@ public class EmployeeServiceImpl implements EmployeeService {
         log.debug("Insert employee in employee table");
         if (employee == null) {
             throw new IllegalArgumentException("Employee is null");
-        } else if (null == employee.getFirstName()) {
+        }else if (null == employee.getFirstName()) {
+            throw new IllegalArgumentException();
+        }else if ((null == employee.getLastName())&&("".equals(employee.getLastName()))) {
+            throw new IllegalArgumentException();
+        }else if (null == employee.getAddress()&& employee.getAddress().length()==0) {
+            throw new IllegalArgumentException();
+        }else if ((null == employee.getPosition()) && ("".equals(employee.getPosition()))) {
+            throw new IllegalArgumentException();
+        }else if ((null == employee.getDepartmentId())) {
             throw new IllegalArgumentException();
         } else {
             List<Employee> exEmployee = employeeDao.getEmployeeByFirstName(employee.getFirstName());

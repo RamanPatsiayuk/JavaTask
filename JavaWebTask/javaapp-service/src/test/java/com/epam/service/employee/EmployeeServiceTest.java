@@ -46,7 +46,7 @@ public class EmployeeServiceTest extends Assert {
         testEmployee1 = new Employee(7, "Dima", "Pupkin", "Brest, Green Street", "SE", 4, 600);
         testEmployee2 = new Employee(11, "Dasha", "Sidorova", "Brest, Sovetskaya street", "SSE", 3,700);
         testEmployee3 = new Employee(14, "Masha", "Dudkina", "Brest, Krasnogvardeiskaya street", "LSE", 5,720);
-        testEmployee4 = new Employee(15, "Sasha", "Baranov", "Minsk, Voronianskogo street", "JTAE", 5,420);
+        testEmployee4 = new Employee(null, "Sasha", "Baranov", "Minsk, Voronianskogo street", "JTAE", 5,420);
     }
 
     @Test
@@ -75,7 +75,7 @@ public class EmployeeServiceTest extends Assert {
 
     @Test(expected = IllegalArgumentException.class)
     public void addNullEmployeeAddress() throws Exception{
-        employeeService.insertEmployee(new Employee(null, "Kostia", "Pupkin", null, "SE", null,600));
+        employeeService.insertEmployee(new Employee(null, "Kostia", "Pupkin", null, "SE", 3,600));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -95,7 +95,7 @@ public class EmployeeServiceTest extends Assert {
 
     @Test(expected = IllegalArgumentException.class)
     public void addEmptyEmployeeAddress() throws Exception{
-        employeeService.insertEmployee(new Employee(null, "Kostia", "Pupkin", "", "SE", null,600));
+        employeeService.insertEmployee(new Employee(null, "Kostia", "Pupkin", "", "SE", 2,600));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -103,9 +103,9 @@ public class EmployeeServiceTest extends Assert {
         employeeService.insertEmployee(new Employee(null, "Kostia", "Pupkin", "Brest, Green Street", "", null,600));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test
     public void insertExistingEmployee() throws Exception{
-        employeeService.insertEmployee(new Employee(10, "Vasia", "Pupkin", "Brest, Green Street", "SE", 2,600));
+        employeeService.insertEmployee(new Employee(null, "Vasia", "Pupkin", "Brest, Green Street", "SE", 2,600));
     }
 
     @Test
@@ -128,7 +128,7 @@ public class EmployeeServiceTest extends Assert {
     public void getEmployeeById() {
         employeeService.insertEmployee(testEmployee4);
         Employee emp = employeeService.getEmployeeById(4);
-        assertTrue(emp.equals(testEmployee4));
+        assertTrue(emp.equals(new Employee(4, "Sasha", "Baranov", "Minsk, Voronianskogo street", "JTAE", 5,420)));
     }
 
     @Test
