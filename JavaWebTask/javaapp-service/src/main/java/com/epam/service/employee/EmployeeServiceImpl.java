@@ -29,11 +29,11 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new IllegalArgumentException("Employee is null");
         }else if (null == employee.getFirstName()) {
             throw new IllegalArgumentException();
-        }else if ((null == employee.getLastName())&&("".equals(employee.getLastName()))) {
+        }else if ((null == employee.getLastName())||("".equals(employee.getLastName()))) {
             throw new IllegalArgumentException();
-        }else if (null == employee.getAddress()&& employee.getAddress().length()==0) {
+        }else if ((null == employee.getAddress())|| (employee.getAddress().length()==0)) {
             throw new IllegalArgumentException();
-        }else if ((null == employee.getPosition()) && ("".equals(employee.getPosition()))) {
+        }else if ((null == employee.getPosition()) || ("".equals(employee.getPosition()))) {
             throw new IllegalArgumentException();
         }else if ((null == employee.getDepartmentId())) {
             throw new IllegalArgumentException();
@@ -82,8 +82,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee getEmployeeById(int id) {
         log.debug("Update employee in employee table");
         Employee exEmployee = employeeDao.getEmployeeById(id);
-        if (exEmployee != null) {
-            throw new IllegalArgumentException("Object is existing in Employee database");
+        if (exEmployee == null) {
+            throw new IllegalArgumentException("Object is not existing in Employee database");
         }
         return exEmployee;
     }
