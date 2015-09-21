@@ -28,8 +28,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 
         if(department == null){
             throw new IllegalArgumentException("Department is null");
-        }else if(null == department.getDepartmentName()){
-            throw new IllegalArgumentException("Department name is null");
+        }else if((null == department.getDepartmentName()) ||("".equals(department.getDepartmentName()))){
+            throw new IllegalArgumentException("Department name is null or empty");
         }else{
             List<Department> exDepartment = departmentDao.getDepartmentByName(department.getDepartmentName());
             if ((exDepartment != null)&&(exDepartment.size()>0)) {
