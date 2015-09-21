@@ -6,13 +6,9 @@
 
     <import resource="classpath:daoSpringContext.xml"/>
 
-    <bean id="employeeService" class="com.epam.service.employee.EmployeeServiceImpl">
-        <property name="employeeDao" ref="employeeDao" />
-    </bean>
+    <bean id="employeeService" class="com.epam.service.employee.EmployeeServiceImpl"/>
 
-    <bean id="departmentService" class="com.epam.service.department.DepartmentServiceImpl">
-        <property name="departmentDao" ref="departmentDao" />
-    </bean>
+    <bean id="departmentService" class="com.epam.service.department.DepartmentServiceImpl" />
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource" />
