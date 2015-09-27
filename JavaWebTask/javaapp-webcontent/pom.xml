@@ -13,6 +13,7 @@
         <spring-version>4.1.6.RELEASE</spring-version>
         <h2-version>1.4.187</h2-version>
         <log4j-version>1.2.17</log4j-version>
+        <jetty>8.1.16.v20140903</jetty>
     </properties>
 
     <parent>
@@ -107,10 +108,21 @@
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty}</version>
                 <configuration>
-                    <webXml>src\main\webapp\WEB-INF\web.xml</webXml>
+                    <webApp>
+                        <contextPath>/${project.artifactId}</contextPath>
+                    </webApp>
+                    <stopKey>STOP</stopKey>
+                    <stopPort>9191</stopPort>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <connectors>
+                        <connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
+                            <port>8181</port>
+                        </connector>
+                    </connectors>
                 </configuration>
             </plugin>
         </plugins>

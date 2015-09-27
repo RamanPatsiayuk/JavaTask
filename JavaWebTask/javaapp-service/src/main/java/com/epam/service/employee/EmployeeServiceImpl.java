@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import validators.EmployeeValidator;
 
 import java.util.List;
 
@@ -21,6 +22,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     private EmployeeDao employeeDao;
+
+    @Autowired
+    private EmployeeValidator employeeValidator;
 
     @Override
     public int insertEmployee(final Employee employee) {
@@ -86,8 +90,5 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new IllegalArgumentException("Object is not existing in Employee database");
         }
         return exEmployee;
-    }
-
-    public void setEmployeeDao(com.epam.dao.employee.EmployeeDaoImpl employeeDao) {
     }
 }
