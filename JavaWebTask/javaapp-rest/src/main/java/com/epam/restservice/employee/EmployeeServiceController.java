@@ -15,6 +15,7 @@ import java.util.List;
  */
 
 @RestController
+@RequestMapping("/employee")
 public class EmployeeServiceController {
 
     static final Logger log = Logger.getLogger(EmployeeServiceController.class);
@@ -23,21 +24,17 @@ public class EmployeeServiceController {
     @Autowired
     private EmployeeService employeeService;
 
-    @RequestMapping(value = { "/employee/employeeId={employeeId}&firstName={firstName}&lastName={lastName}&address={address}&position={position}&departmentId={departmentId}&salary={salary}" }, method = RequestMethod.POST)
-    public @ResponseBody List<Employee> addEmployee(@PathVariable Integer employeeId,@PathVariable String firstName,
+    @RequestMapping(value = { "/firstName={firstName}&lastName={lastName}&address={address}&position={position}&departmentId={departmentId}&salary={salary}" }, method = RequestMethod.POST)
+    public @ResponseBody List<Employee> addEmployee(@PathVariable String firstName,
                                                     @PathVariable String lastName,@PathVariable String address,
                                                     @PathVariable String position,@PathVariable Integer departmentId,
-                                                    @PathVariable double salary,
-                                                    ModelMap model) {
+                                                    @PathVariable double salary) {
         log.info("Start add employee");
-        employeeService.insertEmployee(new Employee(employeeId,firstName,lastName,address,position,departmentId,salary));
-        List<Employee> employees = employeeService.getEmployees();
-        model.addAttribute("employee", employees);
-        model.addAttribute("edit", false);
-        return employees;
+        employeeService.insertEmployee(new Employee(null,firstName,lastName,address,position,departmentId,salary));
+        return employeeService.getEmployees();
     }
 
-    @RequestMapping(value = { "/employee/editEmployee/employeeId={employeeId}&firstName={firstName}&lastName={lastName}&address={address}&position={position}&departmentId={departmentId}&salary={salary}" }, method = RequestMethod.POST)
+    @RequestMapping(value = { "/editEmployee/employeeId={employeeId}&firstName={firstName}&lastName={lastName}&address={address}&position={position}&departmentId={departmentId}&salary={salary}" }, method = RequestMethod.POST)
     public @ResponseBody List<Employee> updateEmployee( @PathVariable Integer employeeId,@PathVariable String firstName,
                                                         @PathVariable String lastName,@PathVariable String address,
                                                         @PathVariable String position,@PathVariable Integer departmentId,
@@ -51,27 +48,23 @@ public class EmployeeServiceController {
         return employees;
     }
 
-    @RequestMapping(value = {"/employee/{firstName}" }, method = RequestMethod.GET)
-    public @ResponseBody List<Employee> getEmployee(@PathVariable String firstName,ModelMap model) {
+    @RequestMapping(value = {"/{firstName}" }, method = RequestMethod.GET)
+    public List<Employee> getEmployee(@PathVariable String firstName) {
             log.info("Start getEmployee by name="+ firstName);
-            List<Employee> employee = employeeService.getEmployeeByFirstName(firstName);
-            model.addAttribute("employee", employee);
-            return employee;
-        }
+            return employeeService.getEmployeeByFirstName(firstName);
+    }
 
-    @RequestMapping(value = { "/employee/delete/{id}" }, method = RequestMethod.PUT)
-    public @ResponseBody List<Employee> deleteEmployee(@PathVariable int id) {
+    @RequestMapping(value = { "/delete/{id}" }, method = RequestMethod.PUT)
+    public List<Employee> deleteEmployee(@PathVariable int id) {
             log.info("Start delete Employees.");
             List<Employee> employee = employeeService.getEmployees();
             employeeService.deleteEmployee(id);
             return employee;
         }
 
-    @RequestMapping(value = {"/employee/listEmployee" }, method = RequestMethod.GET)
-    public @ResponseBody List<Employee> listEmployees(ModelMap model) {
+    @RequestMapping(value = {"/listEmployee" }, method = RequestMethod.GET)
+    public List<Employee> listEmployees() {
         log.info("Start getAllEmployees.");
-        List<Employee> employees = employeeService.getEmployees();
-        model.addAttribute("employees", employees);
-        return employees;
+        return employeeService.getEmployees();
     }
 }

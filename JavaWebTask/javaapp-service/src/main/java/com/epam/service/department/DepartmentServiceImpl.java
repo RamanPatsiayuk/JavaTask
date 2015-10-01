@@ -20,8 +20,8 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     static final Logger log = Logger.getLogger(DepartmentServiceImpl.class);
 
-    @Autowired
-    private DepartmentValidator departmentValidator;
+    /*@Autowired
+    private DepartmentValidator departmentValidator;*/
 
     @Autowired
     private DepartmentDao departmentDao;

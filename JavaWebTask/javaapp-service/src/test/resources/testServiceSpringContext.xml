@@ -4,7 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	                      http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <import resource="classpath:daoSpringContext.xml"/>
     <import resource="classpath:serviceSpringContext.xml"/>
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

@@ -36,10 +36,10 @@ public class DepartmentDaoImpl extends NamedParameterJdbcDaoSupport implements D
     @Autowired
     public DataSource dataSource;
 
-    @Autowired
+    /*@Autowired
     public DepartmentDaoImpl(DataSource dataSource) {
         setDataSource(dataSource);
-    }
+    }*/
     //if we do not use NamedParameterJdbcDaoSupport we should use this code
     /*public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
