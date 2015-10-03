@@ -5,8 +5,10 @@ import com.epam.service.employee.EmployeeService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -24,28 +26,25 @@ public class EmployeeServiceController {
     @Autowired
     private EmployeeService employeeService;
 
-    @RequestMapping(value = { "/firstName={firstName}&lastName={lastName}&address={address}&position={position}&departmentId={departmentId}&salary={salary}" }, method = RequestMethod.POST)
-    public @ResponseBody List<Employee> addEmployee(@PathVariable String firstName,
+    @RequestMapping(value = { "/addEmployee/{employeeId}/{firstName}/{lastName}/{address}/{position}/{departmentId}/{salary}" }, method = RequestMethod.POST)
+    public String addEmployee(@PathVariable Integer employeeId,@PathVariable String firstName,
                                                     @PathVariable String lastName,@PathVariable String address,
                                                     @PathVariable String position,@PathVariable Integer departmentId,
                                                     @PathVariable double salary) {
         log.info("Start add employee");
-        employeeService.insertEmployee(new Employee(null,firstName,lastName,address,position,departmentId,salary));
-        return employeeService.getEmployees();
+        employeeService.insertEmployee(new Employee(employeeId,firstName,lastName,address,position,departmentId,salary));
+        return "redirect:/javaapp-restservice/employeeService/" /*+ employeeId*/;
     }
 
-    @RequestMapping(value = { "/editEmployee/employeeId={employeeId}&firstName={firstName}&lastName={lastName}&address={address}&position={position}&departmentId={departmentId}&salary={salary}" }, method = RequestMethod.POST)
-    public @ResponseBody List<Employee> updateEmployee( @PathVariable Integer employeeId,@PathVariable String firstName,
+    @RequestMapping(value = { "/editEmployee/{employeeId}/{firstName}/{lastName}/{address}/{position}/{departmentId}/{salary}" }, method = RequestMethod.PUT)
+    public String updateEmployee( @PathVariable Integer employeeId,@PathVariable String firstName,
                                                         @PathVariable String lastName,@PathVariable String address,
                                                         @PathVariable String position,@PathVariable Integer departmentId,
-                                                        @PathVariable double salary,
-                                                        ModelMap model) {
+                                                        @PathVariable double salary) {
         log.info("Start update employee");
-        List<Employee> employees = employeeService.getEmployees();
         Employee employee = new Employee(employeeId,firstName,lastName,address,position,departmentId,salary);
         employeeService.updateEmployee(employee);
-        model.addAttribute("success", "Employee " + employee.getFirstName()  + " updated successfully");
-        return employees;
+        return "redirect:/javaapp-restservice/employeeService/" + employeeId;
     }
 
     @RequestMapping(value = {"/{firstName}" }, method = RequestMethod.GET)
@@ -55,11 +54,10 @@ public class EmployeeServiceController {
     }
 
     @RequestMapping(value = { "/delete/{id}" }, method = RequestMethod.PUT)
-    public List<Employee> deleteEmployee(@PathVariable int id) {
+    public String deleteEmployee(@PathVariable int id) {
             log.info("Start delete Employees.");
-            List<Employee> employee = employeeService.getEmployees();
             employeeService.deleteEmployee(id);
-            return employee;
+            return "Employee" + id + "deleted";
         }
 
     @RequestMapping(value = {"/listEmployee" }, method = RequestMethod.GET)

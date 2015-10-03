@@ -4,6 +4,7 @@ import com.epam.dao.employee.EmployeeDao;
 import com.epam.model.Employee;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +20,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     static final Logger log = Logger.getLogger(EmployeeServiceImpl.class);
 
+    @Qualifier("employeeDao")
     @Autowired
     private EmployeeDao employeeDao;
 
@@ -51,7 +53,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void updateEmployee(final Employee employee) {
-        if (employee.getFirstName() != null & employee.getLastName() != null) {
+        log.debug("Update employee in employee table");
+        Employee exEmployee = employeeDao.getEmployeeById(employee.getEmployeeId());
+        if (exEmployee != null) {
             employeeDao.updateEmployee(employee);
         }
     }
@@ -83,7 +87,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee getEmployeeById(int id) {
-        log.debug("Update employee in employee table");
+        log.debug("Get employee by id in employee table");
         Employee exEmployee = employeeDao.getEmployeeById(id);
         if (exEmployee == null) {
             throw new IllegalArgumentException("Object is not existing in Employee database");
