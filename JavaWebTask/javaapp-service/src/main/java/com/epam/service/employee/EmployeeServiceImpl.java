@@ -32,19 +32,19 @@ public class EmployeeServiceImpl implements EmployeeService {
         log.debug("Insert employee in employee table");
         if (employee == null) {
             throw new IllegalArgumentException("Employee is null");
-        }else if (null == employee.getFirstName()||("".equals(employee.getFirstName().trim()))) {
+        } else if (null == employee.getFirstName() || ("".equals(employee.getFirstName().trim()))) {
             throw new IllegalArgumentException();
-        }else if ((null == employee.getLastName())||("".equals(employee.getLastName().trim()))) {
+        } else if ((null == employee.getLastName()) || ("".equals(employee.getLastName().trim()))) {
             throw new IllegalArgumentException();
-        }else if ((null == employee.getAddress())|| (employee.getAddress().trim().length() == 0)) {
+        } else if ((null == employee.getAddress()) || (employee.getAddress().trim().length() == 0)) {
             throw new IllegalArgumentException();
-        }else if ((null == employee.getPosition()) || ("".equals(employee.getPosition().trim()))) {
+        } else if ((null == employee.getPosition()) || ("".equals(employee.getPosition().trim()))) {
             throw new IllegalArgumentException();
-        }else if ((null == employee.getDepartmentId())) {
+        } else if ((null == employee.getDepartmentId())) {
             throw new IllegalArgumentException();
         } else {
             List<Employee> exEmployee = employeeDao.getEmployeeByFirstName(employee.getFirstName());
-            if ((exEmployee != null) && (exEmployee.size()>0)) {
+            if ((exEmployee != null) && (exEmployee.size() > 0)) {
                 throw new IllegalArgumentException();
             }
         }
@@ -75,7 +75,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void deleteEmployee(int id) {
         log.debug("Delete employee");
-        employeeDao.deleteEmployee(id);
+        Employee employee = employeeDao.getEmployeeById(id);
+        if (employee != null) {
+            employeeDao.deleteEmployee(id);
+        }
     }
 
     @Override

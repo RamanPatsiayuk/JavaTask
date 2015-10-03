@@ -32,7 +32,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
         if(department == null){
             throw new IllegalArgumentException("Department is null");
-        }else if((null == department.getDepartmentName()) ||("".equals(department.getDepartmentName()))){
+        }else if((null == department.getDepartmentName()) ||("".equals(department.getDepartmentName().trim()))){
             throw new IllegalArgumentException("Department name is null or empty");
         }else{
             List<Department> exDepartment = departmentDao.getDepartmentByName(department.getDepartmentName());

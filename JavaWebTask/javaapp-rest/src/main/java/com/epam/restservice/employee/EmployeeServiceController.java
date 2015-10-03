@@ -25,15 +25,14 @@ public class EmployeeServiceController {
     @Qualifier("employeeService")
     @Autowired
     private EmployeeService employeeService;
-
+    //addEmployee/4/Dima/Zasranec/Brest/JSE/2/300
     @RequestMapping(value = { "/addEmployee/{employeeId}/{firstName}/{lastName}/{address}/{position}/{departmentId}/{salary}" }, method = RequestMethod.POST)
-    public String addEmployee(@PathVariable Integer employeeId,@PathVariable String firstName,
+    public void addEmployee(@PathVariable Integer employeeId,@PathVariable String firstName,
                                                     @PathVariable String lastName,@PathVariable String address,
                                                     @PathVariable String position,@PathVariable Integer departmentId,
                                                     @PathVariable double salary) {
         log.info("Start add employee");
         employeeService.insertEmployee(new Employee(employeeId,firstName,lastName,address,position,departmentId,salary));
-        return "redirect:/javaapp-restservice/employeeService/" /*+ employeeId*/;
     }
 
     @RequestMapping(value = { "/editEmployee/{employeeId}/{firstName}/{lastName}/{address}/{position}/{departmentId}/{salary}" }, method = RequestMethod.PUT)
@@ -57,7 +56,7 @@ public class EmployeeServiceController {
     public String deleteEmployee(@PathVariable int id) {
             log.info("Start delete Employees.");
             employeeService.deleteEmployee(id);
-            return "Employee" + id + "deleted";
+            return "Employee " + id + " deleted";
         }
 
     @RequestMapping(value = {"/listEmployee" }, method = RequestMethod.GET)
