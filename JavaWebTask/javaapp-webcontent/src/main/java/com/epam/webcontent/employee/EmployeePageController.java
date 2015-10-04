@@ -1,4 +1,4 @@
-package com.epam.employee;
+package com.epam.webcontent.employee;
 
 import com.epam.model.Employee;
 import com.epam.service.employee.EmployeeService;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -19,13 +18,14 @@ import java.util.List;
  */
 
 @Controller
+@RequestMapping("/employee")
 public class EmployeePageController {
 
     @Qualifier("employeeService")
     @Autowired
     private EmployeeService employeeService;
 
-    @RequestMapping(value = { "/addedEmployee" }, method = RequestMethod.POST)
+    @RequestMapping(value = { "/addEmployee" }, method = RequestMethod.POST)
     public String addEmployee(Employee employee) {
         if (employee.getFirstName() != null)
             employeeService.insertEmployee(employee);
@@ -33,27 +33,27 @@ public class EmployeePageController {
     }
 
     @RequestMapping(value = { "/updateEmployee" }, method = RequestMethod.PUT)
-    public String updateEmployee(@Valid Employee employee) {
+    public String updateEmployee(Employee employee) {
         if(employee.getFirstName() != null){
             employeeService.updateEmployee(employee);
         }
         return "redirect:/getEmployeeList";
     }
 
-    @RequestMapping(value = {"/employee/{name}" }, method = RequestMethod.GET)
-    public String getEmployee(@PathVariable String name,ModelMap model) {
-            List<Employee> employee = employeeService.getEmployeeByFirstName(name);
+    @RequestMapping(value = {"/{firstName}" }, method = RequestMethod.GET)
+    public String getEmployee(String firstName,ModelMap model) {
+            List<Employee> employee = employeeService.getEmployeeByFirstName(firstName);
             model.addAttribute("employee", employee);
             return "redirect:/getEmployeeList";
         }
 
-    @RequestMapping(value = { "/employee/delete/{id}" }, method = RequestMethod.DELETE)
+    @RequestMapping(value = { "/delete/{id}" }, method = RequestMethod.PUT)
     public String deleteEmployee(@PathVariable int id) {
             employeeService.deleteEmployee(id);
             return "redirect:/getEmployeeList";
         }
 
-    @RequestMapping(value ={"/getEmployeeList"},method = RequestMethod.GET)
+    @RequestMapping(value ={"/employeeList"},method = RequestMethod.GET)
     public ModelAndView listEmployees() {
         List<Employee> employeeList = employeeService.getEmployees();
         return new ModelAndView("employeeList", "employeeList", employeeList);

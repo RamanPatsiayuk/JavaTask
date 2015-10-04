@@ -12,7 +12,7 @@
 <body>
     <b>Employee list</b>
     <table border="1">
-        <tr><td colspan="7"><a href="addedEmployee">Add New Employee</a></td></tr>
+        <tr><td colspan="7"><a href="addEmployee">Add New Employee</a></td></tr>
         <tr>
             <td>Employee Id</td>
             <td>First Name</td>
@@ -33,8 +33,8 @@
                 <td>${employee.position}</td>
                 <td>${employee.departmentId}</td>
                 <td>${employee.salary}</td>
-                <td><a href="edit?id=${employee.employeeId}">Edit</a></td>
-                <td><a href="delete?id=${employee.employeeId}">Delete</a></td>
+                <td><a href="/updateEmployee/${employee.employeeId}">Edit</a></td>
+                <td><a href="/delete/${employee.employeeId}">Delete</a></td>
             </tr>
         </c:forEach>
     </table>
