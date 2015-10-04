@@ -25,7 +25,6 @@ public class EmployeeServiceController {
     @Qualifier("employeeService")
     @Autowired
     private EmployeeService employeeService;
-    //addEmployee/4/Dima/Zasranec/Brest/JSE/2/300
     @RequestMapping(value = { "/addEmployee/{employeeId}/{firstName}/{lastName}/{address}/{position}/{departmentId}/{salary}" }, method = RequestMethod.POST)
     public void addEmployee(@PathVariable Integer employeeId,@PathVariable String firstName,
                                                     @PathVariable String lastName,@PathVariable String address,

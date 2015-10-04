@@ -4,9 +4,10 @@ import com.epam.dao.department.DepartmentDao;
 import com.epam.model.Department;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import validators.DepartmentValidator;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     /*@Autowired
     private DepartmentValidator departmentValidator;*/
 
+    @Qualifier("departmentDao")
     @Autowired
     private DepartmentDao departmentDao;
 
@@ -46,28 +48,45 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Override
     public void updateDepartment(final Department department) {
         log.debug("Update department in department table");
-        departmentDao.updateDepartment(department);
+        Department dep = departmentDao.getDepartmentById(department.getDepartmentId());
+        if (dep != null) {
+            departmentDao.updateDepartment(department);
+        }
     }
 
     @Override
     public List<Department> getDepartmentByName(final String name) {
         log.debug("Get department from department table");
-        return departmentDao.getDepartmentByName(name);
+        List<Department> listDepartment = null;
+        try {
+            listDepartment = departmentDao.getDepartmentByName(name);
+        } catch (EmptyResultDataAccessException e) {
+            log.debug("Empty result. Employee is not present in employee database " + name);
+        }
+        return listDepartment;
     }
 
     @Override
     public void deleteDepartment(int id) {
         log.debug("Delete department in department table");
-        departmentDao.deleteDepartment(id);
+        Department dep = departmentDao.getDepartmentById(id);
+        if (dep != null) {
+            departmentDao.deleteDepartment(id);
+        }
     }
 
     @Override
     public List<Department> getDepartments() {
+        log.debug("Get all departments");
         return departmentDao.getDepartments();
     }
 
     @Override
     public Department getDepartmentById(int id) {
-        return departmentDao.getDepartmentById(id);
+        Department dep = departmentDao.getDepartmentById(id);
+        if (dep == null) {
+            throw new IllegalArgumentException("Object is not existing in Employee database");
+        }
+        return dep;
     }
 }
