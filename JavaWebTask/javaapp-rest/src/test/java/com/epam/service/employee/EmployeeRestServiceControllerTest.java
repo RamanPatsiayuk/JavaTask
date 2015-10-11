@@ -1,5 +1,6 @@
 package com.epam.service.employee;
 
+import com.epam.restservice.employee.EmployeeRestServiceController;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
@@ -13,6 +14,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
+import javax.annotation.Resource;
 import javax.ws.rs.NotFoundException;
 
 import static org.easymock.EasyMock.*;
@@ -40,9 +42,6 @@ public class EmployeeRestServiceControllerTest {
     @Autowired
     private EmployeeService employeeRestService;
 
-   /* @Resource
-    private EmployeeRestServiceController employeeRestServiceController;*/
-
     @Before
     public void setup() {
         this.mockMvc = webAppContextSetup(this.wac).build();
@@ -59,7 +58,7 @@ public class EmployeeRestServiceControllerTest {
         log.info("---------------Get employee is not present in employee table--------------------");
         expect(employeeRestService.getEmployeeByFirstName("Vladimir")).andThrow(new NotFoundException("Employee is not present"));
         replay(employeeRestService);
-        this.mockMvc.perform(get("/employeeService/Vladimir")
+        this.mockMvc.perform(get("/employee/Vladimir")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isNotFound());

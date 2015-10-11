@@ -51,9 +51,9 @@ public class DepartmentRestServiceControllerTest {
 
     @Test
     public void getDepartmentNotFoundTest() throws Exception {
-        expect(departmentRestService.getDepartmentByName(".Net")).andThrow(new NotFoundException("Department is not present"));
+        expect(departmentRestService.getDepartmentByName("Fortran")).andThrow(new NotFoundException("Department is not present"));
         replay(departmentRestService);
-        this.mockMvc.perform(get("/department/.Net")
+        this.mockMvc.perform(get("/department/Fortran")
                 .accept(MediaType.APPLICATION_JSON))
                 .andDo(print())
                 .andExpect(status().isNotFound());
