@@ -18,9 +18,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/employee")
-public class EmployeeServiceController {
+public class EmployeeRestServiceController {
 
-    static final Logger log = Logger.getLogger(EmployeeServiceController.class);
+    static final Logger log = Logger.getLogger(EmployeeRestServiceController.class);
 
     @Qualifier("employeeService")
     @Autowired

@@ -134,6 +134,22 @@
                 <artifactId>hamcrest-all</artifactId>
                 <version>${harmcrest-version}</version>
             </dependency>
+            <!-- This is for mocking the service -->
+           <!-- <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-all</artifactId>
+                <version>2.0.2-beta</version>
+            </dependency>-->
+            <dependency>
+                <groupId>org.easymock</groupId>
+                <artifactId>easymock</artifactId>
+                <version>3.1</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.ws.rs</groupId>
+                <artifactId>javax.ws.rs-api</artifactId>
+                <version>2.0</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

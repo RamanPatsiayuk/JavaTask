@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	                      http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd   http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
+
+    <context:component-scan base-package="com.epam.restservice"/>
+
+    <import resource="classpath:serviceSpringContext.xml"/>
+
+    <!--<bean class="org.mockito.Mockito" factory-method="mock">
+        <constructor-arg value="com.epam.service.employee.EmployeeService"/>
+    </bean>-->
+    <bean id="employeeRestService" class="org.easymock.EasyMock" factory-method="createMock">
+        <constructor-arg type="java.lang.Class" value="com.epam.service.employee.EmployeeService"/>
+    </bean>
+
+    <bean id="departmentRestService" class="org.easymock.EasyMock" factory-method="createMock">
+        <constructor-arg type="java.lang.Class" value="com.epam.service.department.DepartmentService"/>
+    </bean>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="org.h2.Driver" />
+        <property name="url" value="jdbc:h2:mem:employee;DB_CLOSE_DELAY=-1" />
+        <property name="username" value="sa" />
+        <property name="password" value="" />
+    </bean>
+
+    <jdbc:initialize-database data-source="dataSource">
+        <jdbc:script location="classpath:department.sql"/>
+        <jdbc:script location="classpath:department-data-script.sql"/>
+        <jdbc:script location="classpath:employee.sql"/>
+        <jdbc:script location="classpath:employee-data-script.sql"/>
+    </jdbc:initialize-database>
+</beans>

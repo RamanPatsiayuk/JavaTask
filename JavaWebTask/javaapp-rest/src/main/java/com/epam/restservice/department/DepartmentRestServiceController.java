@@ -17,9 +17,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/department")
-public class DepartmentServiceController {
+public class DepartmentRestServiceController {
 
-    static final Logger log = Logger.getLogger(DepartmentServiceController.class);
+    static final Logger log = Logger.getLogger(DepartmentRestServiceController.class);
 
     @Autowired
     private DepartmentService departmentService;
