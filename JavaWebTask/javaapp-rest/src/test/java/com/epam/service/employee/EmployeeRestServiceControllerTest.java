@@ -1,6 +1,6 @@
 package com.epam.service.employee;
 
-import com.epam.restservice.employee.EmployeeRestServiceController;
+import com.epam.model.Employee;
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
@@ -14,8 +14,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
-import javax.annotation.Resource;
 import javax.ws.rs.NotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.easymock.EasyMock.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -64,4 +65,29 @@ public class EmployeeRestServiceControllerTest {
                 .andExpect(status().isNotFound());
         verify(employeeRestService);
     }
+
+    @Test
+    public void getEmployeeByFirstNameTest() throws Exception {
+
+        List<Employee> list = new ArrayList<>();
+        list.add(new Employee(1, "Ivan", "Sidorov","Brest, Orlovskaya street","SE", 1,700));
+        list.add(new Employee(2, "Petr", "Ivanov","Brest, Kyibisheva 100","JTAE", 2,750));
+
+        expect(employeeRestService.getEmployeeByFirstName("Ivan")).andReturn(list);
+
+        replay(employeeRestService);
+        this.mockMvc.perform(get("/employee/Ivan")
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
+                //.andExpect();
+
+        verify(employeeRestService);
+    }
+
+    //http://localhost:8080/javaapp-rest/employee/listEmployee
+    //[{"employeeId":1,"firstName":"Ivan","lastName":"Sidorov","address":"Brest, Orlovskaya street","position":"SE","departmentId":1,"salary":700.0},{"employeeId":2,"firstName":"Petr","lastName":"Ivanov","address":"Brest, Kyibisheva 100","position":"JTAE","departmentId":2,"salary":750.0},{"employeeId":3,"firstName":"Vitaliy","lastName":"Petrov","address":"Minsk, Voronianskogo 24","position":"SSE","departmentId":3,"salary":1200.0}]
+
+    //http://localhost:8080/javaapp-rest/employee/Ivan
+    //[{"employeeId":1,"firstName":"Ivan","lastName":"Sidorov","address":"Brest, Orlovskaya street","position":"SE","departmentId":1,"salary":700.0}]
 }

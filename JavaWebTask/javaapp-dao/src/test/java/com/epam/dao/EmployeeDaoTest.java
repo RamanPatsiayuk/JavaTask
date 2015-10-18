@@ -68,6 +68,17 @@ public class EmployeeDaoTest extends Assert {
         assertThat(empByFirstName.size(), greaterThanOrEqualTo(1));
     }
 
+    /*@Test
+    public void getEmployeesInDepartment() {
+        List<Object> averageSalary = employeeDao.getEmployeesInDepartment();
+
+        for (int i=0; i<averageSalary.size();i++)
+        {
+            System.out.println(averageSalary);
+            //System.err.println(entry.getKey() + "/" + entry.getValue());
+        }
+    }*/
+
     @Test
     public void getEmployeeById() {
         employeeDao.insertEmployee(testEmployee4);

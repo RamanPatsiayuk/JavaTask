@@ -22,4 +22,6 @@ public interface EmployeeDao {
     public List getEmployees();
 
     public Employee getEmployeeById(int id);
+
+    public List<Object> getEmployeesInDepartment();
 }

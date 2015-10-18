@@ -42,6 +42,8 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new IllegalArgumentException();
         } else if ((null == employee.getDepartmentId())) {
             throw new IllegalArgumentException();
+        }else if ((employee.getSalary()<0)) {
+            throw new IllegalArgumentException();
         } else {
             List<Employee> exEmployee = employeeDao.getEmployeeByFirstName(employee.getFirstName());
             if ((exEmployee != null) && (exEmployee.size() > 0)) {
@@ -96,5 +98,11 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new IllegalArgumentException("Object is not existing in Employee database");
         }
         return exEmployee;
+    }
+
+    @Override
+    public List<Object> getEmployeesInDepartment() {
+        log.info("Get employee in department");
+        return employeeDao.getEmployeesInDepartment();
     }
 }

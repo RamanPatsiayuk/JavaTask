@@ -59,4 +59,17 @@ public class DepartmentRestServiceControllerTest {
                 .andExpect(status().isNotFound());
         verify(departmentRestService);
     }
-}
+
+    //http://localhost:8080/javaapp-rest/department/listDepartment
+    //[{"departmentId":1,"departmentName":"Java","location":"Brest"},{"departmentId":2,"departmentName":"Javascript","location":"Brest"},{"departmentId":3,"departmentName":"Groovy","location":"Brest"},{"departmentId":4,"departmentName":".Net","location":"Brest"},{"departmentId":5,"departmentName":"Python","location":"Brest"},{"departmentId":6,"departmentName":"PHP","location":"Brest"}]
+
+    /*http://localhost:8080/javaapp-rest/department/Java
+    [{"departmentId":1,"departmentName":"Java","location":"Brest"}]
+    * */
+
+    //http://localhost:8080/javaapp-rest/department/delete/4
+    //Department 4 deleted
+
+    //http://localhost:8080/javaapp-rest/department/addDepartment/7/C/Minsk
+    //
+ }

@@ -3,6 +3,7 @@ package com.epam.dao.department;
 import com.epam.model.Department;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Roman
@@ -22,5 +23,7 @@ public interface DepartmentDao {
     public List<Department> getDepartments();
 
     public Department getDepartmentById(int id);
+
+    public Map<String, Double> getAverageSalaryInDepartment();
 
 }

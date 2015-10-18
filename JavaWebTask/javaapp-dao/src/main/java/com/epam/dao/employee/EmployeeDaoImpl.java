@@ -3,8 +3,10 @@ package com.epam.dao.employee;
 import com.epam.model.Employee;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -12,6 +14,9 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,6 +34,7 @@ public class EmployeeDaoImpl extends NamedParameterJdbcDaoSupport implements Emp
     private static final String getEmployeeSql = "select * from employee order by firstName";
     private static final String getEmployeeByFirstNameSql = "select * from employee where firstName=?";
     private static final String getEmployeeById = "select * from employee where employeeId=?";
+    private static final String listDepartmentEmployees = "select e.firstName ,e.lastName,e.salary ,d.departmentName from employee e right outer join department d on e.departmentId = d.departmentId order by d.departmentName";
 
     //private JdbcTemplate jdbcTemplate;
     //private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -100,5 +106,22 @@ public class EmployeeDaoImpl extends NamedParameterJdbcDaoSupport implements Emp
             log.debug("Return empty result data access exception");
             return null;
         }
+    }
+
+    @Override
+    public List<Object> getEmployeesInDepartment() {
+        return getJdbcTemplate().query(listDepartmentEmployees, new ResultSetExtractor<List<Object>>() {
+            @Override
+            public List<Object> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                List<Object> list= new ArrayList<>();
+                while(resultSet.next()){
+                    list.add(resultSet.getString("departmentName"));
+                    list.add(resultSet.getString("firstName"));
+                    list.add(resultSet.getString("lastName"));
+                    list.add(resultSet.getDouble("salary"));
+                }
+                return list;
+            }
+        });
     }
 }

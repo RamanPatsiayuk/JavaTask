@@ -3,8 +3,10 @@ package com.epam.dao.department;
 import com.epam.model.Department;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -12,7 +14,11 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Roman
@@ -29,6 +35,7 @@ public class DepartmentDaoImpl extends NamedParameterJdbcDaoSupport implements D
     private static final String getDepartmentSql = "select * from department";
     private static final String getDepartmentByNameSql = "select * from department where LOWER(departmentName)=?";
     private static final String getDepartmentById = "select * from department where departmentId=?";
+    private static final String averageSal = "select d.departmentName, avg(e.salary) as average from department d left join employee e on d.departmentId=e.departmentId GROUP BY d.departmentName";
 
     //private JdbcTemplate jdbcTemplate;
     //private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -87,5 +94,19 @@ public class DepartmentDaoImpl extends NamedParameterJdbcDaoSupport implements D
             log.debug("Return empty result data access exception");
             return null;
         }
+    }
+
+    @Override
+    public Map<String, Double> getAverageSalaryInDepartment() {
+        return getJdbcTemplate().query(averageSal, new ResultSetExtractor<Map>() {
+            @Override
+            public Map extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                HashMap<String,Double> map= new HashMap<>();
+                while(resultSet.next()){
+                    map.put(resultSet.getString("departmentName"),resultSet.getDouble("average"));
+                }
+                return map;
+            }
+        });
     }
 }

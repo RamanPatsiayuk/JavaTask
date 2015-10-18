@@ -58,4 +58,10 @@ public class DepartmentRestServiceController {
         log.info("Start getAllDepartments.");
         return departmentService.getDepartments();
     }
+
+    /*@RequestMapping(value = {"/averageSalaryInDepartment"}, method = RequestMethod.GET)
+    public Map getAverageSalaryInDepartment() {
+        log.info("Start getAllDepartments.");
+        return departmentService.getAverageSalaryInDepartment();
+    }*/
 }

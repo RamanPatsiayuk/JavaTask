@@ -5,7 +5,6 @@ package com.epam.model;
  */
 
 public class Employee {
-
     private Integer employeeId;
     private String firstName;
     private String lastName;

@@ -2,7 +2,10 @@ package com.epam.dao;
 
 import com.epam.dao.department.DepartmentDao;
 import com.epam.model.Department;
-import org.junit.*;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -36,6 +39,16 @@ public class DepartmentDaoTest extends Assert {
         testDepartment1 = new Department(9,"Haskell", "Gomel");
         testDepartment2 = new Department(10,"PHP", "Brest");
     }
+
+    /*@Test
+    public void getAverageSalary() {
+        Map<String, Double> averageSalary = departmentDao.getAverageSalaryInDepartment();
+
+        for (Map.Entry<String, Double> entry : averageSalary.entrySet())
+        {
+            System.err.println(entry.getKey() + "/" + entry.getValue());
+        }
+    }*/
 
     @Test
     public void insertDepartment() {

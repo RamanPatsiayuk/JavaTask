@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Roman
@@ -83,10 +84,17 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department getDepartmentById(int id) {
+        log.info("Get department by id");
         Department dep = departmentDao.getDepartmentById(id);
         if (dep == null) {
             throw new IllegalArgumentException("Object is not existing in Employee database");
         }
         return dep;
+    }
+
+    @Override
+    public Map<String, Double> getAverageSalaryInDepartment() {
+        log.info("Get average salary in department");
+        return departmentDao.getAverageSalaryInDepartment();
     }
 }
