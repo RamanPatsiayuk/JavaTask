@@ -31,6 +31,10 @@
             <artifactId>javaapp-dao</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.epam</groupId>
+            <artifactId>javaapp-test</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
         </dependency>

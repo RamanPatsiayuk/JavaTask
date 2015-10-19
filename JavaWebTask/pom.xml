@@ -16,6 +16,7 @@
         <module>javaapp-dao</module>
         <module>javaapp-rest</module>
         <module>javaapp-webcontent</module>
+        <module>javaapp-test</module>
     </modules>
 
     <distributionManagement>
@@ -55,6 +56,12 @@
                 <groupId>${project.groupId}</groupId>
                 <artifactId>javaapp-rest</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.epam</groupId>
+                <artifactId>javaapp-test</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
