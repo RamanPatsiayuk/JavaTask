@@ -4,13 +4,21 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	                      http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <import resource="classpath:daoSpringContext.xml"/>
+    <import resource="classpath:testContext.xml"/>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:database.properties</value>
+            </list>
+        </property>
+    </bean>
 
     <bean id="employeeService" class="com.epam.service.employee.EmployeeServiceImpl"/>
     <bean id="departmentService" class="com.epam.service.department.DepartmentServiceImpl" />
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource" />
+        <constructor-arg ref="dataSource"/>
     </bean>
 
     <!--<bean id="employeeValidator" class="validators.EmployeeValidator" />

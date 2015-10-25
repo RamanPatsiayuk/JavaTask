@@ -5,7 +5,7 @@
 	                      http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <import resource="classpath:testSpringContext.xml"/>
+    <import resource="classpath:testContext.xml"/>
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
