@@ -151,6 +151,14 @@ public class EmployeeServiceTest extends Assert {
         assertTrue(employees.contains(emp1));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void getExistingEmployee(){
+        List<Employee> exEmployee = employeeService.getEmployeeByFirstName("Ivan");
+        assertNotNull(exEmployee);
+        assertTrue(exEmployee.size()>0);
+        throw new IllegalArgumentException();
+    }
+
     @Test
     public void updateEmployeeTest() {
         List<Employee> employees = employeeService.getEmployees();
