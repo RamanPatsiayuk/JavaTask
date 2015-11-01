@@ -25,7 +25,6 @@ public class DepartmentServiceImpl implements DepartmentService {
     /*@Autowired
     private DepartmentValidator departmentValidator;*/
 
-    @Qualifier("departmentDao")
     @Autowired
     private DepartmentDao departmentDao;
 

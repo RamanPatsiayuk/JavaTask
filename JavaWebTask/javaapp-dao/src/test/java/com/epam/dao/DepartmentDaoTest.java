@@ -8,10 +8,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.number.OrderingComparison.greaterThanOrEqualTo;
@@ -40,7 +43,7 @@ public class DepartmentDaoTest extends Assert {
         testDepartment2 = new Department(10,"PHP", "Brest");
     }
 
-    /*@Test
+    @Test
     public void getAverageSalary() {
         Map<String, Double> averageSalary = departmentDao.getAverageSalaryInDepartment();
 
@@ -48,7 +51,21 @@ public class DepartmentDaoTest extends Assert {
         {
             System.err.println(entry.getKey() + "/" + entry.getValue());
         }
-    }*/
+    }
+
+    @Test
+    public void getAverageSalaryMapSize(){
+        Map<String,Double> expected = new HashMap<>();
+        expected.put("Java",700.0);
+        expected.put("Javascript",750.0);
+        expected.put("Clojure",0.0);
+        expected.put("Scala",0.0);
+        expected.put("Groovy",1200.0);
+        expected.put("Python",0.0);
+
+        Map<String, Double> actual = departmentDao.getAverageSalaryInDepartment();
+        assertEquals(expected.size(), actual.size());
+    }
 
     @Test
     public void insertDepartment() {
@@ -58,7 +75,6 @@ public class DepartmentDaoTest extends Assert {
         departments = departmentDao.getDepartments();
         assertThat(sizeBefore + 1,greaterThanOrEqualTo(departments.size()));
     }
-
     @Test
     public void updateDepartment() {
         departmentDao.updateDepartment(testDepartment);
@@ -94,6 +110,11 @@ public class DepartmentDaoTest extends Assert {
     public void getDepartments() {
         assertNotNull(departments);
         assertFalse(departments.isEmpty());
+    }
+
+    @Test(expected = EmptyResultDataAccessException.class)
+    public void getDepartmentByNonPresentId() {
+        throw new EmptyResultDataAccessException(0);
     }
 
     @After

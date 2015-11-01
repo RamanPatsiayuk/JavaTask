@@ -19,9 +19,9 @@ public interface EmployeeDao {
 
     public void deleteEmployee(int id);
 
-    public List getEmployees();
+    public List<Employee> getEmployees();
 
     public Employee getEmployeeById(int id);
 
-    public List<Object> getEmployeesInDepartment();
+    //public Map<String,Employee> getEmployeesInDepartment();
 }

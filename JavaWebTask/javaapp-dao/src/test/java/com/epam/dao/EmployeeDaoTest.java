@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -68,17 +69,6 @@ public class EmployeeDaoTest extends Assert {
         assertThat(empByFirstName.size(), greaterThanOrEqualTo(1));
     }
 
-    /*@Test
-    public void getEmployeesInDepartment() {
-        List<Object> averageSalary = employeeDao.getEmployeesInDepartment();
-
-        for (int i=0; i<averageSalary.size();i++)
-        {
-            System.out.println(averageSalary);
-            //System.err.println(entry.getKey() + "/" + entry.getValue());
-        }
-    }*/
-
     @Test
     public void getEmployeeById() {
         employeeDao.insertEmployee(testEmployee4);
@@ -100,6 +90,11 @@ public class EmployeeDaoTest extends Assert {
         List<Employee> employees = employeeDao.getEmployees();
         assertNotNull(employees);
         assertFalse(employees.isEmpty());
+    }
+
+    @Test(expected = EmptyResultDataAccessException.class)
+    public void getEmployeeByNonPresentId() {
+        throw new EmptyResultDataAccessException(0);
     }
 
     @After

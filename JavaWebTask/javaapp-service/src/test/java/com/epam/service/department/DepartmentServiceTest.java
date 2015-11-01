@@ -12,7 +12,9 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static junit.framework.Assert.*;
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -113,6 +115,20 @@ public class DepartmentServiceTest extends Assert {
         departmentService.deleteDepartment(8);
         departments = departmentService.getDepartments();
         assertThat("Delete employee", sizeBefore - 1, lessThanOrEqualTo(departments.size()));
+    }
+
+    @Test
+    public void getAverageSalaryMapSize(){
+        Map<String,Double> expected = new HashMap<>();
+        expected.put("Java",700.0);
+        expected.put("Javascript",750.0);
+        expected.put("Clojure",0.0);
+        expected.put("Scala",0.0);
+        expected.put("Groovy",1200.0);
+        expected.put("Python",0.0);
+
+        Map<String, Double> actual = departmentService.getAverageSalaryInDepartment();
+        assertEquals(expected.size(), actual.size());
     }
 
     @Test

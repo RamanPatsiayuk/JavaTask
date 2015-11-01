@@ -9,6 +9,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.greaterThanOrEqualTo;
 
 /**
@@ -27,10 +28,30 @@ public class DepartmentTest extends Assert {
     }
 
     @Test
+    public void testDepartmentId(){
+        department.setDepartmentId(1);
+        int id = department.getDepartmentId();
+        assertThat(id, equalTo(1));
+    }
+
+    @Test
     public void testGetDepartment() throws Exception {
         String expected = ".Net";
         department.setDepartmentName(".Net");
         assertThat(department.getDepartmentName(), IsEqual.equalTo(expected));
+    }
+
+    @Test
+    public void testDepartmentLocation(){
+        department.setLocation("Brest,Kyubisheva 13");
+        assertThat(department.getLocation(), equalTo("Brest,Kyubisheva 13"));
+    }
+
+    @Test
+    public void testEqualDepartments(){
+        Department dep1 = listDepartment.get(0);
+        Department dep2 = null;
+        assertFalse(dep1.equals(dep2));
     }
 
     @Test

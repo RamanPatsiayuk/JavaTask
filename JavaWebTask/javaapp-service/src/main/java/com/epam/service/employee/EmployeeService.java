@@ -22,6 +22,4 @@ public interface EmployeeService {
 
     public Employee getEmployeeById(int id);
 
-    public List<Object> getEmployeesInDepartment();
-
 }

@@ -112,6 +112,6 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee firstName=" + this.firstName + ", lastName=" + this.lastName + ", address=" + this.address + ", position=" + this.position + ", departmentId=" + this.departmentId + ", salary=" + this.salary + '}';
+        return "Employee firstName=" + this.firstName + ", lastName=" + this.lastName + ", address=" + this.address + ", position=" + this.position + ", departmentId=" + this.departmentId + ", salary=" + this.salary;
     }
 }

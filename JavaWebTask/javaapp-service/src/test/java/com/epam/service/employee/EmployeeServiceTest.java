@@ -103,6 +103,23 @@ public class EmployeeServiceTest extends Assert {
         employeeService.insertEmployee(new Employee(null, "Kostia", "Pupkin", "Brest, Green Street", "", null,600));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void addNullEmployeeDepartmentId() throws Exception{
+        employeeService.insertEmployee(new Employee(null, "Vasia", "Pupkin", "Brest, Green Street", "SE", null,600));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void addNegativeEmployeeSalary() throws Exception{
+        employeeService.insertEmployee(new Employee(null, "Vasia", "Pupkin", "Brest, Green Street", "SE", 2,-600));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void getEmployeeByFirstNameSize() throws Exception{
+        List<Employee> exEmployee = employeeService.getEmployeeByFirstName("Ivan");
+        if ((exEmployee != null) && (exEmployee.size() > 0))
+            throw new IllegalArgumentException();
+    }
+
     @Test
     public void insertExistingEmployee() throws Exception{
         employeeService.insertEmployee(new Employee(null, "Vasia", "Pupkin", "Brest, Green Street", "SE", 2,600));
@@ -139,10 +156,24 @@ public class EmployeeServiceTest extends Assert {
     }
 
     @Test
+    public void updateEmployeeTest() {
+        List<Employee> employees = employeeService.getEmployees();
+        Employee exEmployee = employeeService.getEmployeeById(1);
+        if (exEmployee != null) {
+            employeeService.updateEmployee(testEmployee);
+        }
+        List<Employee> newEmployees = employeeService.getEmployees();
+        assertThat(employees.size(), equalTo(newEmployees.size()));
+    }
+
+    @Test
     public void deleteEmployee() {
         List<Employee> employees = employeeService.getEmployees();
         int sizeBefore = employees.size();
+        Employee employee = employeeService.getEmployeeById(2);
+        if (employee != null){
         employeeService.deleteEmployee(2);
+        }
         employees = employeeService.getEmployees();
         assertThat("Delete employee", sizeBefore - 1, lessThanOrEqualTo(employees.size()));
     }

@@ -99,10 +99,4 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
         return exEmployee;
     }
-
-    @Override
-    public List<Object> getEmployeesInDepartment() {
-        log.info("Get employee in department");
-        return employeeDao.getEmployeesInDepartment();
-    }
 }

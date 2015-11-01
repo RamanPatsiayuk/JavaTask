@@ -18,6 +18,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Created by Roman
@@ -108,20 +110,20 @@ public class EmployeeDaoImpl extends NamedParameterJdbcDaoSupport implements Emp
         }
     }
 
-    @Override
-    public List<Object> getEmployeesInDepartment() {
-        return getJdbcTemplate().query(listDepartmentEmployees, new ResultSetExtractor<List<Object>>() {
+   /* @Override
+    public Map<String,Object> getEmployeesInDepartment() {
+        return getJdbcTemplate().query(listDepartmentEmployees, new ResultSetExtractor<Map<String,Object>>() {
             @Override
-            public List<Object> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
-                List<Object> list= new ArrayList<>();
+            public Map<String,Object> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                Map<String,Employee> map = new TreeMap<>();
                 while(resultSet.next()){
-                    list.add(resultSet.getString("departmentName"));
+                    map.put().add(resultSet.getString("departmentName"));
                     list.add(resultSet.getString("firstName"));
                     list.add(resultSet.getString("lastName"));
                     list.add(resultSet.getDouble("salary"));
                 }
-                return list;
+                return map;
             }
         });
-    }
+    }*/
 }
