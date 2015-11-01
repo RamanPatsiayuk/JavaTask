@@ -63,10 +63,4 @@ public class EmployeeRestServiceController {
         log.info("Start getAllEmployees.");
         return employeeService.getEmployees();
     }
-
-    /*@RequestMapping(value = {"/listEmployeeInDepartment" }, method = RequestMethod.GET)
-    public List<Object> getEmployeesInDepartment() {
-        log.info("Get employee in department");
-        return employeeService.getEmployeesInDepartment();
-    }*/
 }

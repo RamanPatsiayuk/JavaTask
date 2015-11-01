@@ -86,8 +86,18 @@ public class DepartmentServiceTest extends Assert {
         assertThat(sizeBefore + 1,greaterThanOrEqualTo(departments.size()));
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void testInsertExistingDepartment() {
+        departments = departmentService.getDepartments();
+        List<Department> exDepartment = departmentService.getDepartmentByName("Java");
+        assertNotNull(exDepartment);
+        assertTrue(exDepartment.size()>0);
+        throw new IllegalArgumentException();
+    }
+
     @Test
     public void updateDepartment() {
+        notNull(testDepartment);
         departmentService.updateDepartment(testDepartment);
         List<Department> newDepartments = departmentService.getDepartments();
         assertThat(departments.size(), equalTo(newDepartments.size()));
@@ -109,10 +119,26 @@ public class DepartmentServiceTest extends Assert {
         assertTrue(dep.getDepartmentName() == testDepartment1.getDepartmentName());
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void getNonPresentDepartment() {
+        Department dep = departmentService.getDepartmentById(8);
+        assertNotNull(dep);
+    }
+
     @Test
     public void deleteDepartment() {
         int sizeBefore = departments.size();
-        departmentService.deleteDepartment(8);
+        departmentService.deleteDepartment(6);
+        departments = departmentService.getDepartments();
+        assertThat("Delete employee", sizeBefore - 1, lessThanOrEqualTo(departments.size()));
+    }
+
+    @Test
+    public void deleteExistsDepartment() {
+        Department dep = departmentService.getDepartmentById(6);
+        assertNotNull(dep);
+        int sizeBefore = departments.size();
+        departmentService.deleteDepartment(6);
         departments = departmentService.getDepartments();
         assertThat("Delete employee", sizeBefore - 1, lessThanOrEqualTo(departments.size()));
     }

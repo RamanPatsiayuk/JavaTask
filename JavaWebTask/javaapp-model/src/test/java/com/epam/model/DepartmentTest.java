@@ -67,6 +67,13 @@ public class DepartmentTest extends Assert {
         throw new NullPointerException();
     }
 
+    @Test
+    public void testHashCodes(){
+        Department dep1 = new Department(4,"Java","Brest");
+        Department dep2 = new Department(4,"Java","Brest");
+        assertTrue(dep1.hashCode() == dep2.hashCode());
+    }
+
     @After
     public void tearDown() {
         department = null;

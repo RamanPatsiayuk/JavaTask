@@ -4,7 +4,6 @@ import com.epam.dao.department.DepartmentDao;
 import com.epam.model.Department;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,9 +20,6 @@ import java.util.Map;
 public class DepartmentServiceImpl implements DepartmentService {
 
     static final Logger log = Logger.getLogger(DepartmentServiceImpl.class);
-
-    /*@Autowired
-    private DepartmentValidator departmentValidator;*/
 
     @Autowired
     private DepartmentDao departmentDao;

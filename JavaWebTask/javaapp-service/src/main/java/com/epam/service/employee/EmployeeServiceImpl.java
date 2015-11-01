@@ -20,12 +20,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     static final Logger log = Logger.getLogger(EmployeeServiceImpl.class);
 
-    @Qualifier("employeeDao")
     @Autowired
     private EmployeeDao employeeDao;
-
-    /*@Autowired
-    private EmployeeValidator employeeValidator;*/
 
     @Override
     public int insertEmployee(final Employee employee) {

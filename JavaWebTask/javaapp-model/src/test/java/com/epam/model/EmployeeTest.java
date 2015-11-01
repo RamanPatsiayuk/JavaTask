@@ -115,6 +115,20 @@ public class EmployeeTest extends Assert {
         assertEquals(expectedResult,employee);
     }
 
+    @Test
+    public void testEmployeeHashCodes(){
+        Employee emp1 = new Employee(1,"Vasiya","Petrov","Minsk","SE",1,600);
+        Employee emp2 = new Employee(1,"Vasiya","Petrov","Minsk","SE",1,600);
+        assertTrue(emp1.hashCode() == emp2.hashCode());
+    }
+
+    @Test(expected = AssertionError.class)
+    public void testDifferentEmployeeHashCodes(){
+        Employee emp1 = new Employee(1,"Vasiya","Petrov","Minsk","SE",1,600);
+        Employee emp2 = new Employee(2,"Vasiya","Petrov","Minsk","SE",1,600);
+        assertTrue(emp1.hashCode() == emp2.hashCode());
+    }
+
     @After
     public void tearDown() {
         employee = null;

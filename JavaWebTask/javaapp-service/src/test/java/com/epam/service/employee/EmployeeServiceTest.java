@@ -114,15 +114,11 @@ public class EmployeeServiceTest extends Assert {
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void getEmployeeByFirstNameSize() throws Exception{
-        List<Employee> exEmployee = employeeService.getEmployeeByFirstName("Ivan");
-        if ((exEmployee != null) && (exEmployee.size() > 0))
-            throw new IllegalArgumentException();
-    }
-
-    @Test
     public void insertExistingEmployee() throws Exception{
-        employeeService.insertEmployee(new Employee(null, "Vasia", "Pupkin", "Brest, Green Street", "SE", 2,600));
+        List<Employee> exEmployee = employeeService.getEmployeeByFirstName("Ivan");
+        notNull(exEmployee, "employee should not be null.");
+        assertTrue(exEmployee.size()>0);
+            throw new IllegalArgumentException();
     }
 
     @Test
@@ -159,9 +155,8 @@ public class EmployeeServiceTest extends Assert {
     public void updateEmployeeTest() {
         List<Employee> employees = employeeService.getEmployees();
         Employee exEmployee = employeeService.getEmployeeById(1);
-        if (exEmployee != null) {
-            employeeService.updateEmployee(testEmployee);
-        }
+        Assert.notNull(exEmployee, "employee should not be null.");
+        employeeService.updateEmployee(testEmployee);
         List<Employee> newEmployees = employeeService.getEmployees();
         assertThat(employees.size(), equalTo(newEmployees.size()));
     }
@@ -171,9 +166,8 @@ public class EmployeeServiceTest extends Assert {
         List<Employee> employees = employeeService.getEmployees();
         int sizeBefore = employees.size();
         Employee employee = employeeService.getEmployeeById(2);
-        if (employee != null){
+        Assert.notNull(employee, "employee should not be null.");
         employeeService.deleteEmployee(2);
-        }
         employees = employeeService.getEmployees();
         assertThat("Delete employee", sizeBefore - 1, lessThanOrEqualTo(employees.size()));
     }
